@@ -2081,287 +2081,379 @@ Version 3.2 HI-TECH Software Intermediate Code
 "18 RAINBO-starter.c
 [v _red `uc ~T0 @X0 1 e ]
 [i _red
--> -> 0 `i `uc
+-> -> 254 `i `uc
 ]
-[; ;RAINBO-starter.c: 18: unsigned char red = 0;
+[; ;RAINBO-starter.c: 18: unsigned char red = 254;
 "19
 [v _green `uc ~T0 @X0 1 e ]
 [i _green
--> -> 64 `i `uc
+-> -> 0 `i `uc
 ]
-[; ;RAINBO-starter.c: 19: unsigned char green = 64;
+[; ;RAINBO-starter.c: 19: unsigned char green = 0;
 "20
 [v _blue `uc ~T0 @X0 1 e ]
 [i _blue
--> -> 64 `i `uc
+-> -> 0 `i `uc
 ]
-[; ;RAINBO-starter.c: 20: unsigned char blue = 64;
+[; ;RAINBO-starter.c: 20: unsigned char blue = 0;
 "22
-[v _tempRed `uc ~T0 @X0 1 e ]
-[; ;RAINBO-starter.c: 22: unsigned char tempRed;
-"23
-[v _tempGreen `uc ~T0 @X0 1 e ]
-[; ;RAINBO-starter.c: 23: unsigned char tempGreen;
+[v _type `uc ~T0 @X0 1 e ]
+[i _type
+-> -> 1 `i `uc
+]
+[; ;RAINBO-starter.c: 22: unsigned char type = 1;
 "24
-[v _tempBlue `uc ~T0 @X0 1 e ]
-[; ;RAINBO-starter.c: 24: unsigned char tempBlue;
-"26
 [v _maxLEDs `Cuc ~T0 @X0 1 e ]
 [i _maxLEDs
 -> -> 60 `i `uc
 ]
-[; ;RAINBO-starter.c: 26: const char maxLEDs = 60;
-"28
+[; ;RAINBO-starter.c: 24: const char maxLEDs = 60;
+"26
 [v _temp `uc ~T0 @X0 1 e ]
-[; ;RAINBO-starter.c: 28: unsigned char temp;
-"29
+[; ;RAINBO-starter.c: 26: unsigned char temp;
+"27
 [v _i `uc ~T0 @X0 1 e ]
-[; ;RAINBO-starter.c: 29: unsigned char i;
-"31
+[; ;RAINBO-starter.c: 27: unsigned char i;
+"29
 [v _adConvert `(uc ~T0 @X0 1 ef1`uc ]
-"32
 {
-[; ;RAINBO-starter.c: 31: unsigned char adConvert(unsigned char chan)
-[; ;RAINBO-starter.c: 32: {
+[; ;RAINBO-starter.c: 29: unsigned char adConvert(unsigned char chan) {
 [e :U _adConvert ]
-"31
 [v _chan `uc ~T0 @X0 1 r1 ]
-"32
 [f ]
-[; ;RAINBO-starter.c: 33: ADON = 1;
-"33
+[; ;RAINBO-starter.c: 30: ADON = 1;
+"30
 [e = _ADON -> -> 1 `i `b ]
-[; ;RAINBO-starter.c: 34: ADCON0 = (ADCON0 & 0b10000011);
-"34
+[; ;RAINBO-starter.c: 31: ADCON0 = (ADCON0 & 0b10000011);
+"31
 [e = _ADCON0 -> & -> _ADCON0 `i -> 131 `i `uc ]
-[; ;RAINBO-starter.c: 35: ADCON0 = (ADCON0 | chan);
-"35
+[; ;RAINBO-starter.c: 32: ADCON0 = (ADCON0 | chan);
+"32
 [e = _ADCON0 -> | -> _ADCON0 `i -> _chan `i `uc ]
-[; ;RAINBO-starter.c: 36: _delay((unsigned long)((2)*(32000000/4000000.0)));
-"36
+[; ;RAINBO-starter.c: 33: _delay((unsigned long)((2)*(32000000/4000000.0)));
+"33
 [e ( __delay (1 -> * -> -> 2 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;RAINBO-starter.c: 37: GO = 1;
-"37
+[; ;RAINBO-starter.c: 34: GO = 1;
+"34
 [e = _GO -> -> 1 `i `b ]
-[; ;RAINBO-starter.c: 39: while(GO);
-"39
+[; ;RAINBO-starter.c: 36: while (GO);
+"36
 [e $U 263  ]
 [e :U 264 ]
 [e :U 263 ]
 [e $ _GO 264  ]
 [e :U 265 ]
-[; ;RAINBO-starter.c: 41: ADON = 0;
-"41
+[; ;RAINBO-starter.c: 38: ADON = 0;
+"38
 [e = _ADON -> -> 0 `i `b ]
-[; ;RAINBO-starter.c: 42: return (ADRESH);
-"42
+[; ;RAINBO-starter.c: 39: return (ADRESH);
+"39
 [e ) _ADRESH ]
 [e $UE 262  ]
-[; ;RAINBO-starter.c: 43: }
-"43
+[; ;RAINBO-starter.c: 40: }
+"40
 [e :UE 262 ]
 }
-"49
+"46
 [v _neoRGB `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
-"50
 {
-[; ;RAINBO-starter.c: 49: void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned char leds)
-[; ;RAINBO-starter.c: 50: {
+[; ;RAINBO-starter.c: 46: void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned char leds) {
 [e :U _neoRGB ]
 [v _red `uc ~T0 @X0 1 r1 ]
 [v _green `uc ~T0 @X0 1 r2 ]
 [v _blue `uc ~T0 @X0 1 r3 ]
-"49
 [v _leds `uc ~T0 @X0 1 r4 ]
-"50
 [f ]
-[; ;RAINBO-starter.c: 51: for(leds; leds != 0; leds--)
-"51
+[; ;RAINBO-starter.c: 47: for (leds; leds != 0; leds--) {
+"47
 {
 [e _leds ]
 [e $ != -> _leds `i -> 0 `i 267  ]
 [e $U 268  ]
-"52
 [e :U 267 ]
-[; ;RAINBO-starter.c: 52: {
 {
-[; ;RAINBO-starter.c: 53: temp = green;
-"53
+[; ;RAINBO-starter.c: 48: temp = green;
+"48
 [e = _temp _green ]
-[; ;RAINBO-starter.c: 54: for(i = 8; i != 0; i--)
-"54
+[; ;RAINBO-starter.c: 49: for (i = 8; i != 0; i--) {
+"49
 {
 [e = _i -> -> 8 `i `uc ]
 [e $ != -> _i `i -> 0 `i 270  ]
 [e $U 271  ]
-"55
 [e :U 270 ]
-[; ;RAINBO-starter.c: 55: {
 {
-[; ;RAINBO-starter.c: 56: asm("bsf LATA,4");
-"56
+[; ;RAINBO-starter.c: 50: asm("bsf LATA,4");
+"50
 [; <" bsf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 57: asm("nop");
-"57
+[; ;RAINBO-starter.c: 51: asm("nop");
+"51
 [; <" nop ;# ">
-[; ;RAINBO-starter.c: 58: asm("btfss _temp,7");
-"58
+[; ;RAINBO-starter.c: 52: asm("btfss _temp,7");
+"52
 [; <" btfss _temp,7 ;# ">
-[; ;RAINBO-starter.c: 59: asm("bcf LATA,4");
-"59
+[; ;RAINBO-starter.c: 53: asm("bcf LATA,4");
+"53
 [; <" bcf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 60: asm("nop");
-"60
-[; <" nop ;# ">
-[; ;RAINBO-starter.c: 61: asm("lslf _temp,f");
-"61
-[; <" lslf _temp,f ;# ">
-[; ;RAINBO-starter.c: 62: asm("bcf LATA,4");
-"62
-[; <" bcf LATA,4 ;# ">
-"63
-}
+[; ;RAINBO-starter.c: 54: asm("nop");
 "54
+[; <" nop ;# ">
+[; ;RAINBO-starter.c: 55: asm("lslf _temp,f");
+"55
+[; <" lslf _temp,f ;# ">
+[; ;RAINBO-starter.c: 56: asm("bcf LATA,4");
+"56
+[; <" bcf LATA,4 ;# ">
+"57
+}
+"49
 [e -- _i -> -> 1 `i `uc ]
 [e $ != -> _i `i -> 0 `i 270  ]
 [e :U 271 ]
-"63
+"57
 }
-[; ;RAINBO-starter.c: 63: }
-[; ;RAINBO-starter.c: 64: temp = red;
-"64
+[; ;RAINBO-starter.c: 57: }
+[; ;RAINBO-starter.c: 58: temp = red;
+"58
 [e = _temp _red ]
-[; ;RAINBO-starter.c: 65: for(i = 8; i != 0; i--)
-"65
+[; ;RAINBO-starter.c: 59: for (i = 8; i != 0; i--) {
+"59
 {
 [e = _i -> -> 8 `i `uc ]
 [e $ != -> _i `i -> 0 `i 273  ]
 [e $U 274  ]
-"66
 [e :U 273 ]
-[; ;RAINBO-starter.c: 66: {
 {
-[; ;RAINBO-starter.c: 67: asm("bsf LATA,4");
-"67
+[; ;RAINBO-starter.c: 60: asm("bsf LATA,4");
+"60
 [; <" bsf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 68: asm("nop");
-"68
+[; ;RAINBO-starter.c: 61: asm("nop");
+"61
 [; <" nop ;# ">
-[; ;RAINBO-starter.c: 69: asm("btfss _temp,7");
-"69
+[; ;RAINBO-starter.c: 62: asm("btfss _temp,7");
+"62
 [; <" btfss _temp,7 ;# ">
-[; ;RAINBO-starter.c: 70: asm("bcf LATA,4");
-"70
+[; ;RAINBO-starter.c: 63: asm("bcf LATA,4");
+"63
 [; <" bcf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 71: asm("nop");
-"71
+[; ;RAINBO-starter.c: 64: asm("nop");
+"64
 [; <" nop ;# ">
-[; ;RAINBO-starter.c: 72: asm("lslf _temp,f");
-"72
-[; <" lslf _temp,f ;# ">
-[; ;RAINBO-starter.c: 73: asm("bcf LATA,4");
-"73
-[; <" bcf LATA,4 ;# ">
-"74
-}
+[; ;RAINBO-starter.c: 65: asm("lslf _temp,f");
 "65
+[; <" lslf _temp,f ;# ">
+[; ;RAINBO-starter.c: 66: asm("bcf LATA,4");
+"66
+[; <" bcf LATA,4 ;# ">
+"67
+}
+"59
 [e -- _i -> -> 1 `i `uc ]
 [e $ != -> _i `i -> 0 `i 273  ]
 [e :U 274 ]
-"74
+"67
 }
-[; ;RAINBO-starter.c: 74: }
-[; ;RAINBO-starter.c: 75: temp = blue;
-"75
+[; ;RAINBO-starter.c: 67: }
+[; ;RAINBO-starter.c: 68: temp = blue;
+"68
 [e = _temp _blue ]
-[; ;RAINBO-starter.c: 76: for(i = 8; i != 0; i--)
-"76
+[; ;RAINBO-starter.c: 69: for (i = 8; i != 0; i--) {
+"69
 {
 [e = _i -> -> 8 `i `uc ]
 [e $ != -> _i `i -> 0 `i 276  ]
 [e $U 277  ]
-"77
 [e :U 276 ]
-[; ;RAINBO-starter.c: 77: {
 {
-[; ;RAINBO-starter.c: 78: asm("bsf LATA,4");
-"78
+[; ;RAINBO-starter.c: 70: asm("bsf LATA,4");
+"70
 [; <" bsf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 79: asm("nop");
-"79
+[; ;RAINBO-starter.c: 71: asm("nop");
+"71
 [; <" nop ;# ">
-[; ;RAINBO-starter.c: 80: asm("btfss _temp,7");
-"80
+[; ;RAINBO-starter.c: 72: asm("btfss _temp,7");
+"72
 [; <" btfss _temp,7 ;# ">
-[; ;RAINBO-starter.c: 81: asm("bcf LATA,4");
-"81
+[; ;RAINBO-starter.c: 73: asm("bcf LATA,4");
+"73
 [; <" bcf LATA,4 ;# ">
-[; ;RAINBO-starter.c: 82: asm("nop");
-"82
+[; ;RAINBO-starter.c: 74: asm("nop");
+"74
 [; <" nop ;# ">
-[; ;RAINBO-starter.c: 83: asm("lslf _temp,f");
-"83
+[; ;RAINBO-starter.c: 75: asm("lslf _temp,f");
+"75
 [; <" lslf _temp,f ;# ">
-[; ;RAINBO-starter.c: 84: asm("bcf LATA,4");
-"84
-[; <" bcf LATA,4 ;# ">
-"85
-}
+[; ;RAINBO-starter.c: 76: asm("bcf LATA,4");
 "76
+[; <" bcf LATA,4 ;# ">
+"77
+}
+"69
 [e -- _i -> -> 1 `i `uc ]
 [e $ != -> _i `i -> 0 `i 276  ]
 [e :U 277 ]
-"85
+"77
 }
-"86
+"78
 }
-"51
+"47
 [e -- _leds -> -> 1 `i `uc ]
 [e $ != -> _leds `i -> 0 `i 267  ]
 [e :U 268 ]
-"86
+"78
 }
-[; ;RAINBO-starter.c: 85: }
-[; ;RAINBO-starter.c: 86: }
-[; ;RAINBO-starter.c: 87: }
-"87
+[; ;RAINBO-starter.c: 77: }
+[; ;RAINBO-starter.c: 78: }
+[; ;RAINBO-starter.c: 79: }
+"79
 [e :UE 266 ]
 }
-[v $root$_main `(v ~T0 @X0 0 e ]
-"89
-[v _main `(i ~T0 @X0 1 ef ]
-"90
+"81
+[v _changeLEDS `(v ~T0 @X0 1 ef ]
 {
-[; ;RAINBO-starter.c: 89: int main(void)
-[; ;RAINBO-starter.c: 90: {
+[; ;RAINBO-starter.c: 81: void changeLEDS() {
+[e :U _changeLEDS ]
+[f ]
+[; ;RAINBO-starter.c: 82: if (red == 254 && blue == 0) type = 2;
+"82
+[e $ ! && == -> _red `i -> 254 `i == -> _blue `i -> 0 `i 280  ]
+[e = _type -> -> 2 `i `uc ]
+[e :U 280 ]
+[; ;RAINBO-starter.c: 83: if (red == 254 && green == 254) type = 4;
+"83
+[e $ ! && == -> _red `i -> 254 `i == -> _green `i -> 254 `i 281  ]
+[e = _type -> -> 4 `i `uc ]
+[e :U 281 ]
+[; ;RAINBO-starter.c: 84: if (green == 254 && red == 0) type = 3;
+"84
+[e $ ! && == -> _green `i -> 254 `i == -> _red `i -> 0 `i 282  ]
+[e = _type -> -> 3 `i `uc ]
+[e :U 282 ]
+[; ;RAINBO-starter.c: 85: if (blue == 254) type = 5;
+"85
+[e $ ! == -> _blue `i -> 254 `i 283  ]
+[e = _type -> -> 5 `i `uc ]
+[e :U 283 ]
+[; ;RAINBO-starter.c: 86: if (blue == 254 && green == 0) type = 1;
+"86
+[e $ ! && == -> _blue `i -> 254 `i == -> _green `i -> 0 `i 284  ]
+[e = _type -> -> 1 `i `uc ]
+[e :U 284 ]
+[; ;RAINBO-starter.c: 87: if (blue == 254 && red == 254) type = 6;
+"87
+[e $ ! && == -> _blue `i -> 254 `i == -> _red `i -> 254 `i 285  ]
+[e = _type -> -> 6 `i `uc ]
+[e :U 285 ]
+[; ;RAINBO-starter.c: 88: switch (type) {
+"88
+[e $U 287  ]
+{
+[; ;RAINBO-starter.c: 89: case 1:
+"89
+[e :U 288 ]
+[; ;RAINBO-starter.c: 90: red++;
+"90
+[e ++ _red -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 91: break;
+"91
+[e $U 286  ]
+[; ;RAINBO-starter.c: 92: case 2:
+"92
+[e :U 289 ]
+[; ;RAINBO-starter.c: 93: green++;
+"93
+[e ++ _green -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 94: break;
+"94
+[e $U 286  ]
+[; ;RAINBO-starter.c: 95: case 3:
+"95
+[e :U 290 ]
+[; ;RAINBO-starter.c: 96: blue++;
+"96
+[e ++ _blue -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 97: break;
+"97
+[e $U 286  ]
+[; ;RAINBO-starter.c: 98: case 4:
+"98
+[e :U 291 ]
+[; ;RAINBO-starter.c: 99: red--;
+"99
+[e -- _red -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 100: break;
+"100
+[e $U 286  ]
+[; ;RAINBO-starter.c: 101: case 5:
+"101
+[e :U 292 ]
+[; ;RAINBO-starter.c: 102: green--;
+"102
+[e -- _green -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 103: break;
+"103
+[e $U 286  ]
+[; ;RAINBO-starter.c: 104: case 6:
+"104
+[e :U 293 ]
+[; ;RAINBO-starter.c: 105: blue--;
+"105
+[e -- _blue -> -> 1 `i `uc ]
+[; ;RAINBO-starter.c: 106: break;
+"106
+[e $U 286  ]
+"107
+}
+[; ;RAINBO-starter.c: 107: }
+[e $U 286  ]
+"88
+[e :U 287 ]
+[e [\ _type , $ -> -> 1 `i `uc 288
+ , $ -> -> 2 `i `uc 289
+ , $ -> -> 3 `i `uc 290
+ , $ -> -> 4 `i `uc 291
+ , $ -> -> 5 `i `uc 292
+ , $ -> -> 6 `i `uc 293
+ 286 ]
+"107
+[e :U 286 ]
+[; ;RAINBO-starter.c: 108: }
+"108
+[e :UE 279 ]
+}
+[v $root$_main `(v ~T0 @X0 0 e ]
+"110
+[v _main `(i ~T0 @X0 1 ef ]
+"111
+{
+[; ;RAINBO-starter.c: 110: int main(void)
+[; ;RAINBO-starter.c: 111: {
 [e :U _main ]
 [f ]
-[; ;RAINBO-starter.c: 91: init();
-"91
+[; ;RAINBO-starter.c: 112: init();
+"112
 [e ( _init ..  ]
-[; ;RAINBO-starter.c: 92: _delay((unsigned long)((200)*(32000000/4000000.0)));
-"92
+[; ;RAINBO-starter.c: 113: _delay((unsigned long)((200)*(32000000/4000000.0)));
+"113
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 32000000 `l `d .4000000.0 `ul ]
-[; ;RAINBO-starter.c: 95: while(1)
-"95
-[e :U 281 ]
-[; ;RAINBO-starter.c: 96: {
-"96
+[; ;RAINBO-starter.c: 116: while (1) {
+"116
+[e :U 296 ]
 {
-[; ;RAINBO-starter.c: 97: neoRGB(red, green, blue, maxLEDs);
-"97
+[; ;RAINBO-starter.c: 117: neoRGB(red, green, blue, maxLEDs);
+"117
 [e ( _neoRGB (4 , , , _red _green _blue _maxLEDs ]
-[; ;RAINBO-starter.c: 98: asm("sleep");
-"98
-[; <" sleep ;# ">
-"99
+[; ;RAINBO-starter.c: 118: changeLEDS();
+"118
+[e ( _changeLEDS ..  ]
+"120
 }
-[e :U 280 ]
-"95
-[e $U 281  ]
-[e :U 282 ]
-[; ;RAINBO-starter.c: 99: }
-[; ;RAINBO-starter.c: 100: }
-"100
-[e :UE 279 ]
+[e :U 295 ]
+"116
+[e $U 296  ]
+[e :U 297 ]
+[; ;RAINBO-starter.c: 120: }
+[; ;RAINBO-starter.c: 121: }
+"121
+[e :UE 294 ]
 }

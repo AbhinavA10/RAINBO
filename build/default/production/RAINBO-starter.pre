@@ -2861,41 +2861,35 @@ typedef unsigned char bool;
 void init(void);
 
 # 18 "RAINBO-starter.c"
-unsigned char red = 0;
-unsigned char green = 64;
-unsigned char blue = 64;
+unsigned char red = 254;
+unsigned char green = 0;
+unsigned char blue = 0;
 
-unsigned char tempRed;
-unsigned char tempGreen;
-unsigned char tempBlue;
+unsigned char type = 1;
 
 const char maxLEDs = 60;
 
 unsigned char temp;
 unsigned char i;
 
-unsigned char adConvert(unsigned char chan)
-{
+unsigned char adConvert(unsigned char chan) {
 ADON = 1;
 ADCON0 = (ADCON0 & 0b10000011);
 ADCON0 = (ADCON0 | chan);
 _delay((unsigned long)((2)*(32000000/4000000.0)));
 GO = 1;
 
-while(GO);
+while (GO);
 
 ADON = 0;
 return (ADRESH);
 }
 
-# 49
-void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned char leds)
-{
-for(leds; leds != 0; leds--)
-{
+# 46
+void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned char leds) {
+for (leds; leds != 0; leds--) {
 temp = green;
-for(i = 8; i != 0; i--)
-{
+for (i = 8; i != 0; i--) {
 asm("bsf LATA,4");
 asm("nop");
 asm("btfss _temp,7");
@@ -2905,8 +2899,7 @@ asm("lslf _temp,f");
 asm("bcf LATA,4");
 }
 temp = red;
-for(i = 8; i != 0; i--)
-{
+for (i = 8; i != 0; i--) {
 asm("bsf LATA,4");
 asm("nop");
 asm("btfss _temp,7");
@@ -2916,8 +2909,7 @@ asm("lslf _temp,f");
 asm("bcf LATA,4");
 }
 temp = blue;
-for(i = 8; i != 0; i--)
-{
+for (i = 8; i != 0; i--) {
 asm("bsf LATA,4");
 asm("nop");
 asm("btfss _temp,7");
@@ -2929,15 +2921,45 @@ asm("bcf LATA,4");
 }
 }
 
+void changeLEDS() {
+if (red == 254 && blue == 0) type = 2;
+if (red == 254 && green == 254) type = 4;
+if (green == 254 && red == 0) type = 3;
+if (blue == 254) type = 5;
+if (blue == 254 && green == 0) type = 1;
+if (blue == 254 && red == 254) type = 6;
+switch (type) {
+case 1:
+red++;
+break;
+case 2:
+green++;
+break;
+case 3:
+blue++;
+break;
+case 4:
+red--;
+break;
+case 5:
+green--;
+break;
+case 6:
+blue--;
+break;
+}
+}
+
 int main(void)
 {
 init();
 _delay((unsigned long)((200)*(32000000/4000000.0)));
 
 
-while(1)
-{
+while (1) {
 neoRGB(red, green, blue, maxLEDs);
-asm("sleep");
+changeLEDS();
+
 }
 }
+

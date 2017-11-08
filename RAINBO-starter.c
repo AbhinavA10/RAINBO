@@ -19,7 +19,7 @@ unsigned char red = 254; // RGB colour bytes and default starting colour
 unsigned char green = 0;
 unsigned char blue = 0;
 
-unsigned char type = "IR";
+unsigned char type = 1;
 
 const char maxLEDs = 60; // Number of LEDs in the string
 
@@ -79,28 +79,29 @@ void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned
 }
 
 void changeLEDS() {
-    if (red == 254 && blue == 0) type = 'IG';
-    if (red == 254 && green == 254) type = 'DR';
-    if (green == 254 && red == 0) type = 'IB';
-    if (blue == 254) type = 'DG';
-    if (blue == 254 && green == 0) type = 'IR';
+    if (red == 254 && blue == 0) type = 2; // IG
+    if (red == 254 && green == 254) type = 4; //DR
+    if (green == 254 && red == 0) type = 3; //IB
+    if (blue == 254) type = 5; //DG
+    if (blue == 254 && green == 0) type = 1; //IR
+    if (blue == 254 && red == 254) type = 6; //DB
     switch (type) {
-        case "IR":
+        case 1:
             red++;
             break;
-        case "IG":
+        case 2:
             green++;
             break;
-        case "IB":
+        case 3:
             blue++;
             break;
-        case "DR":
+        case 4:
             red--;
             break;
-        case "DG":
+        case 5:
             green--;
             break;
-        case "DB":
+        case 6:
             blue--;
             break;
     }

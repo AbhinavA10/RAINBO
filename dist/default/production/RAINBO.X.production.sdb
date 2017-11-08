@@ -11,9 +11,11 @@
 [v _eecpymem eecpymem `(v  1 e 1 0 ]
 "39
 [v _memcpyee memcpyee `(v  1 e 1 0 ]
-"49 H:\MPLAB\RAINBO.X\RAINBO-starter.c
+"46 H:\MPLAB\RAINBO.X\RAINBO-starter.c
 [v _neoRGB neoRGB `(v  1 e 1 0 ]
-"89
+"81
+[v _changeLEDS changeLEDS `(v  1 e 1 0 ]
+"110
 [v _main main `(i  1 e 2 0 ]
 "12 H:\MPLAB\RAINBO.X\RAINBO.c
 [v _init init `(v  1 e 1 0 ]
@@ -53,33 +55,37 @@
 [v _green green `uc  1 e 1 0 ]
 "20
 [v _blue blue `uc  1 e 1 0 ]
-"26
+"22
+[v _type type `uc  1 e 1 0 ]
+"24
 [v _maxLEDs maxLEDs `DCCuc  1 e 1 0 ]
-"28
+"26
 [v _temp temp `uc  1 e 1 0 ]
-"29
+"27
 [v _i i `uc  1 e 1 0 ]
-"89
+"110
 [v _main main `(i  1 e 2 0 ]
 {
-"100
+"121
 } 0
-"49
+"46
 [v _neoRGB neoRGB `(v  1 e 1 0 ]
 {
-"50
 [v neoRGB@red red `uc  1 a 1 wreg ]
 [v neoRGB@red red `uc  1 a 1 wreg ]
 [v neoRGB@green green `uc  1 p 1 0 ]
 [v neoRGB@blue blue `uc  1 p 1 1 ]
-"49
 [v neoRGB@leds leds `uc  1 p 1 2 ]
-"51
 [v neoRGB@red red `uc  1 a 1 4 ]
-"87
+"79
 } 0
 "12 H:\MPLAB\RAINBO.X\RAINBO.c
 [v _init init `(v  1 e 1 0 ]
 {
 "36
+} 0
+"81 H:\MPLAB\RAINBO.X\RAINBO-starter.c
+[v _changeLEDS changeLEDS `(v  1 e 1 0 ]
+{
+"108
 } 0

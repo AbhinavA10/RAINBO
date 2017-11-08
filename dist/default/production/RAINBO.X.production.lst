@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC LITE Macro Assembler V1.42 build -159332390 
-                                                                                               Thu Oct 19 09:51:59 2017
+                                                                                               Wed Nov 08 10:54:56 2017
 
 Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130522
      1                           	processor	12F1840
@@ -12,11 +12,11 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
      6                           	psect	cinit,global,class=CODE,merge=1,delta=2
      7                           	psect	bssCOMMON,global,class=COMMON,space=1,delta=1
      8                           	psect	dataCOMMON,global,class=COMMON,space=1,delta=1
-     9                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
-    10                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
-    11                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
-    12                           	psect	text1,local,class=CODE,merge=1,delta=2
-    13                           	psect	text2,local,class=CODE,merge=1,delta=2
+     9                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    10                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
+    11                           	psect	text1,local,class=CODE,merge=1,delta=2
+    12                           	psect	text2,local,class=CODE,merge=1,delta=2
+    13                           	psect	text3,local,class=CODE,merge=1,delta=2
     14                           	dabs	1,0x7E,2
     15  0000                     
     16                           ; Version 1.42
@@ -414,13 +414,13 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    400  0FEF                     	;# 
    401                           
    402                           	psect	idataCOMMON
-   403  0763                     __pidataCOMMON:	
+   403  06F9                     __pidataCOMMON:	
    404                           
-   405                           ;initializer for _blue
-   406  0763  3440               	retlw	64
+   405                           ;initializer for _type
+   406  06F9  3401               	retlw	1
    407                           
-   408                           ;initializer for _green
-   409  0764  3440               	retlw	64
+   408                           ;initializer for _red
+   409  06FA  34FE               	retlw	254
    410                           
    411                           	psect	stringtext1
    412  0800                     __pstringtext1:	
@@ -446,428 +446,643 @@ Microchip Technology Omniscient Code Generator v1.42 (Free mode) build 201704130
    432                           ; #config settings
    433  0000                     
    434                           	psect	cinit
-   435  07F0                     start_initialization:	
-   436  07F0                     __initialization:	
+   435  07F2                     start_initialization:	
+   436  07F2                     __initialization:	
    437                           
    438                           ; Initialize objects allocated to COMMON
-   439  07F0  3187  2763  3187   	fcall	__pidataCOMMON	;fetch initializer
-   440  07F3  00FC               	movwf	__pdataCOMMON& (0+127)
-   441  07F4  3187  2764         	fcall	__pidataCOMMON+1	;fetch initializer
-   442  07F6  00FD               	movwf	(__pdataCOMMON+1)& (0+127)
+   439  07F2  3186  26F9  3187   	fcall	__pidataCOMMON	;fetch initializer
+   440  07F5  00FC               	movwf	__pdataCOMMON& (0+127)
+   441  07F6  3186  26FA         	fcall	__pidataCOMMON+1	;fetch initializer
+   442  07F8  00FD               	movwf	(__pdataCOMMON+1)& (0+127)
    443                           
    444                           ; Clear objects allocated to COMMON
-   445  07F7  01F8               	clrf	__pbssCOMMON& (0+127)
-   446  07F8  01F9               	clrf	(__pbssCOMMON+1)& (0+127)
-   447  07F9  01FA               	clrf	(__pbssCOMMON+2)& (0+127)
-   448  07FA  01FB               	clrf	(__pbssCOMMON+3)& (0+127)
-   449                           
-   450                           ; Clear objects allocated to BANK0
-   451  07FB  01A0               	clrf	__pbssBANK0& (0+127)
-   452  07FC  01A1               	clrf	(__pbssBANK0+1)& (0+127)
-   453  07FD                     end_of_initialization:	
-   454                           ;End of C runtime variable initialization code
+   445  07F9  01F8               	clrf	__pbssCOMMON& (0+127)
+   446  07FA  01F9               	clrf	(__pbssCOMMON+1)& (0+127)
+   447  07FB  01FA               	clrf	(__pbssCOMMON+2)& (0+127)
+   448  07FC  01FB               	clrf	(__pbssCOMMON+3)& (0+127)
+   449  07FD                     end_of_initialization:	
+   450                           ;End of C runtime variable initialization code
+   451                           
+   452  07FD                     __end_of__initialization:	
+   453  07FD  0020               	movlb	0
+   454  07FE  3187  2F17         	ljmp	_main	;jump to C main() function
    455                           
-   456  07FD                     __end_of__initialization:	
-   457  07FD  0020               	movlb	0
-   458  07FE  3187  2F81         	ljmp	_main	;jump to C main() function
-   459                           
-   460                           	psect	bssCOMMON
-   461  0078                     __pbssCOMMON:	
-   462  0078                     _i:	
-   463  0078                     	ds	1
-   464  0079                     _tempGreen:	
-   465  0079                     	ds	1
-   466  007A                     _tempRed:	
-   467  007A                     	ds	1
-   468  007B                     _red:	
-   469  007B                     	ds	1
-   470                           
-   471                           	psect	dataCOMMON
-   472  007C                     __pdataCOMMON:	
-   473  007C                     _blue:	
-   474  007C                     	ds	1
-   475  007D                     _green:	
-   476  007D                     	ds	1
-   477                           
-   478                           	psect	bssBANK0
-   479  0020                     __pbssBANK0:	
-   480  0020                     _temp:	
-   481  0020                     	ds	1
-   482  0021                     _tempBlue:	
-   483  0021                     	ds	1
-   484                           
-   485                           	psect	cstackCOMMON
-   486  0070                     __pcstackCOMMON:	
-   487  0070                     ?_init:	
-   488  0070                     ??_init:	
-   489                           ; 1 bytes @ 0x0
-   490                           
-   491  0070                     ?_neoRGB:	
-   492                           ; 1 bytes @ 0x0
-   493                           
-   494  0070                     ?_main:	
-   495                           ; 1 bytes @ 0x0
-   496                           
-   497  0070                     neoRGB@green:	
-   498                           ; 2 bytes @ 0x0
+   456                           	psect	bssCOMMON
+   457  0078                     __pbssCOMMON:	
+   458  0078                     _i:	
+   459  0078                     	ds	1
+   460  0079                     _temp:	
+   461  0079                     	ds	1
+   462  007A                     _blue:	
+   463  007A                     	ds	1
+   464  007B                     _green:	
+   465  007B                     	ds	1
+   466                           
+   467                           	psect	dataCOMMON
+   468  007C                     __pdataCOMMON:	
+   469  007C                     _type:	
+   470  007C                     	ds	1
+   471  007D                     _red:	
+   472  007D                     	ds	1
+   473                           
+   474                           	psect	cstackCOMMON
+   475  0070                     __pcstackCOMMON:	
+   476  0070                     ?_init:	
+   477  0070                     ??_init:	
+   478                           ; 1 bytes @ 0x0
+   479                           
+   480  0070                     ?_neoRGB:	
+   481                           ; 1 bytes @ 0x0
+   482                           
+   483  0070                     ?_changeLEDS:	
+   484                           ; 1 bytes @ 0x0
+   485                           
+   486  0070                     ??_changeLEDS:	
+   487                           ; 1 bytes @ 0x0
+   488                           
+   489  0070                     ?_main:	
+   490                           ; 1 bytes @ 0x0
+   491                           
+   492  0070                     neoRGB@green:	
+   493                           ; 2 bytes @ 0x0
+   494                           
+   495                           
+   496                           ; 1 bytes @ 0x0
+   497  0070                     	ds	1
+   498  0071                     neoRGB@blue:	
    499                           
-   500                           
-   501                           ; 1 bytes @ 0x0
-   502  0070                     	ds	1
-   503  0071                     neoRGB@blue:	
-   504                           
-   505                           ; 1 bytes @ 0x1
-   506  0071                     	ds	1
-   507  0072                     neoRGB@leds:	
-   508                           
-   509                           ; 1 bytes @ 0x2
-   510  0072                     	ds	1
-   511  0073                     ??_neoRGB:	
-   512                           
-   513                           ; 1 bytes @ 0x3
-   514  0073                     	ds	1
-   515  0074                     neoRGB@red:	
-   516                           
-   517                           ; 1 bytes @ 0x4
-   518  0074                     	ds	1
-   519  0075                     ??_main:	
-   520                           
-   521                           ; 1 bytes @ 0x5
-   522  0075                     	ds	3
-   523                           
-   524                           	psect	maintext
-   525  0781                     __pmaintext:	
-   526 ;;
-   527 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
-   528 ;;
-   529 ;; *************** function _main *****************
-   530 ;; Defined at:
-   531 ;;		line 89 in file "RAINBO-starter.c"
-   532 ;; Parameters:    Size  Location     Type
-   533 ;;		None
-   534 ;; Auto vars:     Size  Location     Type
-   535 ;;		None
-   536 ;; Return value:  Size  Location     Type
-   537 ;;                  2   81[None  ] int 
-   538 ;; Registers used:
-   539 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
-   540 ;; Tracked objects:
-   541 ;;		On entry : B1F/0
-   542 ;;		On exit  : 0/0
-   543 ;;		Unchanged: 0/0
-   544 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
-   545 ;;      Params:         0       0       0       0
-   546 ;;      Locals:         0       0       0       0
-   547 ;;      Temps:          3       0       0       0
-   548 ;;      Totals:         3       0       0       0
-   549 ;;Total ram usage:        3 bytes
-   550 ;; Hardware stack levels required when called:    1
-   551 ;; This function calls:
-   552 ;;		_init
-   553 ;;		_neoRGB
-   554 ;; This function is called by:
-   555 ;;		Startup code after reset
-   556 ;; This function uses a non-reentrant model
-   557 ;;
+   500                           ; 1 bytes @ 0x1
+   501  0071                     	ds	1
+   502  0072                     neoRGB@leds:	
+   503                           
+   504                           ; 1 bytes @ 0x2
+   505  0072                     	ds	1
+   506  0073                     ??_neoRGB:	
+   507                           
+   508                           ; 1 bytes @ 0x3
+   509  0073                     	ds	1
+   510  0074                     neoRGB@red:	
+   511                           
+   512                           ; 1 bytes @ 0x4
+   513  0074                     	ds	1
+   514  0075                     ??_main:	
+   515                           
+   516                           ; 1 bytes @ 0x5
+   517  0075                     	ds	3
+   518                           
+   519                           	psect	maintext
+   520  0717                     __pmaintext:	
+   521 ;;
+   522 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   523 ;;
+   524 ;; *************** function _main *****************
+   525 ;; Defined at:
+   526 ;;		line 110 in file "RAINBO-starter.c"
+   527 ;; Parameters:    Size  Location     Type
+   528 ;;		None
+   529 ;; Auto vars:     Size  Location     Type
+   530 ;;		None
+   531 ;; Return value:  Size  Location     Type
+   532 ;;                  2   94[None  ] int 
+   533 ;; Registers used:
+   534 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   535 ;; Tracked objects:
+   536 ;;		On entry : B1F/0
+   537 ;;		On exit  : 0/0
+   538 ;;		Unchanged: 0/0
+   539 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   540 ;;      Params:         0       0       0       0
+   541 ;;      Locals:         0       0       0       0
+   542 ;;      Temps:          3       0       0       0
+   543 ;;      Totals:         3       0       0       0
+   544 ;;Total ram usage:        3 bytes
+   545 ;; Hardware stack levels required when called:    1
+   546 ;; This function calls:
+   547 ;;		_changeLEDS
+   548 ;;		_init
+   549 ;;		_neoRGB
+   550 ;; This function is called by:
+   551 ;;		Startup code after reset
+   552 ;; This function uses a non-reentrant model
+   553 ;;
+   554                           
+   555                           
+   556                           ;psect for function _main
+   557  0717                     _main:	
    558                           
-   559                           
-   560                           ;psect for function _main
-   561  0781                     _main:	
-   562                           
-   563                           ;RAINBO-starter.c: 91: init();
+   559                           ;RAINBO-starter.c: 112: init();
+   560                           
+   561                           ;incstack = 0
+   562                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   563  0717  3186  26FB  3187   	fcall	_init
    564                           
-   565                           ;incstack = 0
-   566                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
-   567  0781  3187  2765  3187   	fcall	_init
-   568                           
-   569                           ;RAINBO-starter.c: 92: _delay((unsigned long)((200)*(32000000/4000000.0)));
-   570  0784  30E4               	movlw	228
-   571  0785                     u197:	
-   572  0785  3200               	nop2
-   573  0786  3200               	nop2
-   574  0787  0B89               	decfsz	9,f
-   575  0788  2F85               	goto	u197
-   576  0789  3200               	nop2
-   577  078A  3200               	nop2
-   578  078B                     l649:	
-   579                           ;RAINBO-starter.c: 95: while(1)
-   580                           
-   581                           
-   582                           ;RAINBO-starter.c: 96: {
-   583                           ;RAINBO-starter.c: 97: neoRGB(red, green, blue, maxLEDs);
-   584  078B  087D               	movf	_green,w
-   585  078C  00F5               	movwf	??_main
-   586  078D  0875               	movf	??_main,w
-   587  078E  00F0               	movwf	neoRGB@green
-   588  078F  087C               	movf	_blue,w
-   589  0790  00F6               	movwf	??_main+1
-   590  0791  0876               	movf	??_main+1,w
-   591  0792  00F1               	movwf	neoRGB@blue
-   592  0793  3000               	movlw	low (_maxLEDs| (0+32768))
-   593  0794  0084               	movwf	4
-   594  0795  3088               	movlw	high (_maxLEDs| (0+32768))
-   595  0796  0085               	movwf	5
-   596  0797  0800               	movf	0,w	;code access
-   597  0798  00F7               	movwf	??_main+2
-   598  0799  0877               	movf	??_main+2,w
-   599  079A  00F2               	movwf	neoRGB@leds
-   600  079B  087B               	movf	_red,w
-   601  079C  3187  27A1  3187   	fcall	_neoRGB
-   602  079F  0063               	sleep	;# 
-   603  07A0  2F8B               	goto	l649
-   604  07A1                     __end_of_main:	
-   605                           
-   606                           	psect	text1
-   607  07A1                     __ptext1:	
-   608 ;; *************** function _neoRGB *****************
-   609 ;; Defined at:
-   610 ;;		line 49 in file "RAINBO-starter.c"
-   611 ;; Parameters:    Size  Location     Type
-   612 ;;  red             1    wreg     unsigned char 
-   613 ;;  green           1    0[COMMON] unsigned char 
-   614 ;;  blue            1    1[COMMON] unsigned char 
-   615 ;;  leds            1    2[COMMON] unsigned char 
-   616 ;; Auto vars:     Size  Location     Type
-   617 ;;  red             1    4[COMMON] unsigned char 
-   618 ;; Return value:  Size  Location     Type
-   619 ;;                  1    wreg      void 
-   620 ;; Registers used:
-   621 ;;		wreg, status,2, status,0
-   622 ;; Tracked objects:
-   623 ;;		On entry : 0/0
-   624 ;;		On exit  : 0/0
-   625 ;;		Unchanged: 0/0
-   626 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
-   627 ;;      Params:         3       0       0       0
-   628 ;;      Locals:         1       0       0       0
-   629 ;;      Temps:          1       0       0       0
-   630 ;;      Totals:         5       0       0       0
-   631 ;;Total ram usage:        5 bytes
-   632 ;; Hardware stack levels used:    1
-   633 ;; This function calls:
-   634 ;;		Nothing
-   635 ;; This function is called by:
-   636 ;;		_main
-   637 ;; This function uses a non-reentrant model
-   638 ;;
-   639                           
+   565                           ;RAINBO-starter.c: 113: _delay((unsigned long)((200)*(32000000/4000000.0)));
+   566  071A  30E4               	movlw	228
+   567  071B                     u307:	
+   568  071B  3200               	nop2
+   569  071C  3200               	nop2
+   570  071D  0B89               	decfsz	9,f
+   571  071E  2F1B               	goto	u307
+   572  071F  3200               	nop2
+   573  0720  3200               	nop2
+   574  0721                     l714:	
+   575                           ;RAINBO-starter.c: 116: while (1) {
+   576                           
+   577                           
+   578                           ;RAINBO-starter.c: 117: neoRGB(red, green, blue, maxLEDs);
+   579  0721  087B               	movf	_green,w
+   580  0722  00F5               	movwf	??_main
+   581  0723  0875               	movf	??_main,w
+   582  0724  00F0               	movwf	neoRGB@green
+   583  0725  087A               	movf	_blue,w
+   584  0726  00F6               	movwf	??_main+1
+   585  0727  0876               	movf	??_main+1,w
+   586  0728  00F1               	movwf	neoRGB@blue
+   587  0729  3000               	movlw	low (_maxLEDs| (0+32768))
+   588  072A  0084               	movwf	4
+   589  072B  3088               	movlw	high (_maxLEDs| (0+32768))
+   590  072C  0085               	movwf	5
+   591  072D  0800               	movf	0,w	;code access
+   592  072E  00F7               	movwf	??_main+2
+   593  072F  0877               	movf	??_main+2,w
+   594  0730  00F2               	movwf	neoRGB@leds
+   595  0731  087D               	movf	_red,w
+   596  0732  3187  2739  3187   	fcall	_neoRGB
+   597                           
+   598                           ;RAINBO-starter.c: 118: changeLEDS();
+   599  0735  3187  2785  3187   	fcall	_changeLEDS
+   600  0738  2F21               	goto	l714
+   601  0739                     __end_of_main:	
+   602                           
+   603                           	psect	text1
+   604  0739                     __ptext1:	
+   605 ;; *************** function _neoRGB *****************
+   606 ;; Defined at:
+   607 ;;		line 46 in file "RAINBO-starter.c"
+   608 ;; Parameters:    Size  Location     Type
+   609 ;;  red             1    wreg     unsigned char 
+   610 ;;  green           1    0[COMMON] unsigned char 
+   611 ;;  blue            1    1[COMMON] unsigned char 
+   612 ;;  leds            1    2[COMMON] unsigned char 
+   613 ;; Auto vars:     Size  Location     Type
+   614 ;;  red             1    4[COMMON] unsigned char 
+   615 ;; Return value:  Size  Location     Type
+   616 ;;                  1    wreg      void 
+   617 ;; Registers used:
+   618 ;;		wreg, status,2, status,0
+   619 ;; Tracked objects:
+   620 ;;		On entry : 0/0
+   621 ;;		On exit  : 0/0
+   622 ;;		Unchanged: 0/0
+   623 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   624 ;;      Params:         3       0       0       0
+   625 ;;      Locals:         1       0       0       0
+   626 ;;      Temps:          1       0       0       0
+   627 ;;      Totals:         5       0       0       0
+   628 ;;Total ram usage:        5 bytes
+   629 ;; Hardware stack levels used:    1
+   630 ;; This function calls:
+   631 ;;		Nothing
+   632 ;; This function is called by:
+   633 ;;		_main
+   634 ;; This function uses a non-reentrant model
+   635 ;;
+   636                           
+   637                           
+   638                           ;psect for function _neoRGB
+   639  0739                     _neoRGB:	
    640                           
-   641                           ;psect for function _neoRGB
-   642  07A1                     _neoRGB:	
-   643                           
-   644                           ;incstack = 0
-   645                           ; Regs used in _neoRGB: [wreg+status,2+status,0]
-   646                           ;neoRGB@red stored from wreg
-   647  07A1  00F4               	movwf	neoRGB@red
-   648  07A2                     L1:	
-   649  07A2  0872               	movf	neoRGB@leds,w
-   650  07A3  1903               	btfsc	3,2
-   651  07A4  0008               	return
-   652                           
-   653                           ;RAINBO-starter.c: 52: {
-   654                           ;RAINBO-starter.c: 53: temp = green;
-   655  07A5  0870               	movf	neoRGB@green,w
-   656  07A6  00F3               	movwf	??_neoRGB
-   657  07A7  0873               	movf	??_neoRGB,w
-   658  07A8  0020               	movlb	0	; select bank0
-   659  07A9  00A0               	movwf	_temp
-   660                           
-   661                           ;RAINBO-starter.c: 54: for(i = 8; i != 0; i--)
-   662  07AA  3008               	movlw	8
-   663  07AB  00F3               	movwf	??_neoRGB
-   664  07AC  0873               	movf	??_neoRGB,w
-   665  07AD  00F8               	movwf	_i
-   666  07AE  0878               	movf	_i,w
-   667  07AF  1903               	btfsc	3,2
-   668  07B0  2FBD               	goto	l627
-   669  07B1                     l71:	
-   670  07B1  160C               	bsf	268,4	;# 
-   671  07B2  0000               	nop	;# 
-   672  07B3  1FA0               	btfss	_temp,7	;# 
-   673  07B4  120C               	bcf	268,4	;# 
-   674  07B5  0000               	nop	;# 
-   675  07B6  35A0               	lslf	_temp,f	;# 
-   676  07B7  120C               	bcf	268,4	;# 
-   677  07B8  3001               	movlw	1
-   678  07B9  02F8               	subwf	_i,f
-   679  07BA  0878               	movf	_i,w
-   680  07BB  1D03               	btfss	3,2
-   681  07BC  2FB1               	goto	l71
-   682  07BD                     l627:	
-   683                           
-   684                           ;RAINBO-starter.c: 63: }
-   685                           ;RAINBO-starter.c: 64: temp = red;
-   686  07BD  0874               	movf	neoRGB@red,w
-   687  07BE  00F3               	movwf	??_neoRGB
-   688  07BF  0873               	movf	??_neoRGB,w
-   689  07C0  0020               	movlb	0	; select bank0
-   690  07C1  00A0               	movwf	_temp
-   691                           
-   692                           ;RAINBO-starter.c: 65: for(i = 8; i != 0; i--)
-   693  07C2  3008               	movlw	8
-   694  07C3  00F3               	movwf	??_neoRGB
-   695  07C4  0873               	movf	??_neoRGB,w
-   696  07C5  00F8               	movwf	_i
-   697  07C6  0878               	movf	_i,w
-   698  07C7  1903               	btfsc	3,2
-   699  07C8  2FD5               	goto	l635
-   700  07C9                     l73:	
-   701  07C9  160C               	bsf	268,4	;# 
-   702  07CA  0000               	nop	;# 
-   703  07CB  1FA0               	btfss	_temp,7	;# 
-   704  07CC  120C               	bcf	268,4	;# 
-   705  07CD  0000               	nop	;# 
-   706  07CE  35A0               	lslf	_temp,f	;# 
-   707  07CF  120C               	bcf	268,4	;# 
-   708  07D0  3001               	movlw	1
-   709  07D1  02F8               	subwf	_i,f
-   710  07D2  0878               	movf	_i,w
-   711  07D3  1D03               	btfss	3,2
-   712  07D4  2FC9               	goto	l73
-   713  07D5                     l635:	
-   714                           
-   715                           ;RAINBO-starter.c: 74: }
-   716                           ;RAINBO-starter.c: 75: temp = blue;
-   717  07D5  0871               	movf	neoRGB@blue,w
-   718  07D6  00F3               	movwf	??_neoRGB
-   719  07D7  0873               	movf	??_neoRGB,w
-   720  07D8  0020               	movlb	0	; select bank0
-   721  07D9  00A0               	movwf	_temp
-   722                           
-   723                           ;RAINBO-starter.c: 76: for(i = 8; i != 0; i--)
-   724  07DA  3008               	movlw	8
-   725  07DB  00F3               	movwf	??_neoRGB
-   726  07DC  0873               	movf	??_neoRGB,w
-   727  07DD  00F8               	movwf	_i
-   728  07DE  0878               	movf	_i,w
-   729  07DF  1903               	btfsc	3,2
-   730  07E0  2FED               	goto	l643
-   731  07E1                     l75:	
-   732  07E1  160C               	bsf	268,4	;# 
-   733  07E2  0000               	nop	;# 
-   734  07E3  1FA0               	btfss	_temp,7	;# 
-   735  07E4  120C               	bcf	268,4	;# 
-   736  07E5  0000               	nop	;# 
-   737  07E6  35A0               	lslf	_temp,f	;# 
-   738  07E7  120C               	bcf	268,4	;# 
-   739  07E8  3001               	movlw	1
-   740  07E9  02F8               	subwf	_i,f
-   741  07EA  0878               	movf	_i,w
-   742  07EB  1D03               	btfss	3,2
-   743  07EC  2FE1               	goto	l75
-   744  07ED                     l643:	
-   745  07ED  3001               	movlw	1
-   746  07EE  02F2               	subwf	neoRGB@leds,f
-   747  07EF  2FA2               	goto	L1
-   748  07F0                     __end_of_neoRGB:	
-   749                           
-   750                           	psect	text2
-   751  0765                     __ptext2:	
-   752 ;; *************** function _init *****************
-   753 ;; Defined at:
-   754 ;;		line 12 in file "RAINBO.c"
-   755 ;; Parameters:    Size  Location     Type
-   756 ;;		None
-   757 ;; Auto vars:     Size  Location     Type
-   758 ;;		None
-   759 ;; Return value:  Size  Location     Type
-   760 ;;                  1    wreg      void 
-   761 ;; Registers used:
-   762 ;;		wreg, status,2
-   763 ;; Tracked objects:
-   764 ;;		On entry : 0/0
-   765 ;;		On exit  : 0/0
-   766 ;;		Unchanged: 0/0
-   767 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
-   768 ;;      Params:         0       0       0       0
-   769 ;;      Locals:         0       0       0       0
-   770 ;;      Temps:          0       0       0       0
-   771 ;;      Totals:         0       0       0       0
-   772 ;;Total ram usage:        0 bytes
-   773 ;; Hardware stack levels used:    1
-   774 ;; This function calls:
-   775 ;;		Nothing
-   776 ;; This function is called by:
-   777 ;;		_main
-   778 ;; This function uses a non-reentrant model
-   779 ;;
-   780                           
-   781                           
-   782                           ;psect for function _init
-   783  0765                     _init:	
-   784                           
-   785                           ;RAINBO.c: 16: OSCCON = 0b11110000;
-   786                           
-   787                           ;incstack = 0
-   788                           ; Regs used in _init: [wreg+status,2]
-   789  0765  30F0               	movlw	240
-   790  0766  0021               	movlb	1	; select bank1
-   791  0767  0099               	movwf	25	;volatile
-   792  0768                     l27:	
-   793                           ;RAINBO.c: 17: while(!PLLR);
+   641                           ;incstack = 0
+   642                           ; Regs used in _neoRGB: [wreg+status,2+status,0]
+   643                           ;neoRGB@red stored from wreg
+   644  0739  00F4               	movwf	neoRGB@red
+   645  073A                     L1:	
+   646  073A  0872               	movf	neoRGB@leds,w
+   647  073B  1903               	btfsc	3,2
+   648  073C  0008               	return
+   649                           
+   650                           ;RAINBO-starter.c: 48: temp = green;
+   651  073D  0870               	movf	neoRGB@green,w
+   652  073E  00F3               	movwf	??_neoRGB
+   653  073F  0873               	movf	??_neoRGB,w
+   654  0740  00F9               	movwf	_temp
+   655                           
+   656                           ;RAINBO-starter.c: 49: for (i = 8; i != 0; i--) {
+   657  0741  3008               	movlw	8
+   658  0742  00F3               	movwf	??_neoRGB
+   659  0743  0873               	movf	??_neoRGB,w
+   660  0744  00F8               	movwf	_i
+   661  0745  0878               	movf	_i,w
+   662  0746  1903               	btfsc	3,2
+   663  0747  2F54               	goto	l692
+   664  0748                     l67:	
+   665  0748  160C               	bsf	268,4	;# 
+   666  0749  0000               	nop	;# 
+   667  074A  1FF9               	btfss	_temp,7	;# 
+   668  074B  120C               	bcf	268,4	;# 
+   669  074C  0000               	nop	;# 
+   670  074D  35F9               	lslf	_temp,f	;# 
+   671  074E  120C               	bcf	268,4	;# 
+   672  074F  3001               	movlw	1
+   673  0750  02F8               	subwf	_i,f
+   674  0751  0878               	movf	_i,w
+   675  0752  1D03               	btfss	3,2
+   676  0753  2F48               	goto	l67
+   677  0754                     l692:	
+   678                           
+   679                           ;RAINBO-starter.c: 57: }
+   680                           ;RAINBO-starter.c: 58: temp = red;
+   681  0754  0874               	movf	neoRGB@red,w
+   682  0755  00F3               	movwf	??_neoRGB
+   683  0756  0873               	movf	??_neoRGB,w
+   684  0757  00F9               	movwf	_temp
+   685                           
+   686                           ;RAINBO-starter.c: 59: for (i = 8; i != 0; i--) {
+   687  0758  3008               	movlw	8
+   688  0759  00F3               	movwf	??_neoRGB
+   689  075A  0873               	movf	??_neoRGB,w
+   690  075B  00F8               	movwf	_i
+   691  075C  0878               	movf	_i,w
+   692  075D  1903               	btfsc	3,2
+   693  075E  2F6B               	goto	l700
+   694  075F                     l69:	
+   695  075F  160C               	bsf	268,4	;# 
+   696  0760  0000               	nop	;# 
+   697  0761  1FF9               	btfss	_temp,7	;# 
+   698  0762  120C               	bcf	268,4	;# 
+   699  0763  0000               	nop	;# 
+   700  0764  35F9               	lslf	_temp,f	;# 
+   701  0765  120C               	bcf	268,4	;# 
+   702  0766  3001               	movlw	1
+   703  0767  02F8               	subwf	_i,f
+   704  0768  0878               	movf	_i,w
+   705  0769  1D03               	btfss	3,2
+   706  076A  2F5F               	goto	l69
+   707  076B                     l700:	
+   708                           
+   709                           ;RAINBO-starter.c: 67: }
+   710                           ;RAINBO-starter.c: 68: temp = blue;
+   711  076B  0871               	movf	neoRGB@blue,w
+   712  076C  00F3               	movwf	??_neoRGB
+   713  076D  0873               	movf	??_neoRGB,w
+   714  076E  00F9               	movwf	_temp
+   715                           
+   716                           ;RAINBO-starter.c: 69: for (i = 8; i != 0; i--) {
+   717  076F  3008               	movlw	8
+   718  0770  00F3               	movwf	??_neoRGB
+   719  0771  0873               	movf	??_neoRGB,w
+   720  0772  00F8               	movwf	_i
+   721  0773  0878               	movf	_i,w
+   722  0774  1903               	btfsc	3,2
+   723  0775  2F82               	goto	l708
+   724  0776                     l71:	
+   725  0776  160C               	bsf	268,4	;# 
+   726  0777  0000               	nop	;# 
+   727  0778  1FF9               	btfss	_temp,7	;# 
+   728  0779  120C               	bcf	268,4	;# 
+   729  077A  0000               	nop	;# 
+   730  077B  35F9               	lslf	_temp,f	;# 
+   731  077C  120C               	bcf	268,4	;# 
+   732  077D  3001               	movlw	1
+   733  077E  02F8               	subwf	_i,f
+   734  077F  0878               	movf	_i,w
+   735  0780  1D03               	btfss	3,2
+   736  0781  2F76               	goto	l71
+   737  0782                     l708:	
+   738  0782  3001               	movlw	1
+   739  0783  02F2               	subwf	neoRGB@leds,f
+   740  0784  2F3A               	goto	L1
+   741  0785                     __end_of_neoRGB:	
+   742                           
+   743                           	psect	text2
+   744  06FB                     __ptext2:	
+   745 ;; *************** function _init *****************
+   746 ;; Defined at:
+   747 ;;		line 12 in file "RAINBO.c"
+   748 ;; Parameters:    Size  Location     Type
+   749 ;;		None
+   750 ;; Auto vars:     Size  Location     Type
+   751 ;;		None
+   752 ;; Return value:  Size  Location     Type
+   753 ;;                  1    wreg      void 
+   754 ;; Registers used:
+   755 ;;		wreg, status,2
+   756 ;; Tracked objects:
+   757 ;;		On entry : 0/0
+   758 ;;		On exit  : 0/0
+   759 ;;		Unchanged: 0/0
+   760 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   761 ;;      Params:         0       0       0       0
+   762 ;;      Locals:         0       0       0       0
+   763 ;;      Temps:          0       0       0       0
+   764 ;;      Totals:         0       0       0       0
+   765 ;;Total ram usage:        0 bytes
+   766 ;; Hardware stack levels used:    1
+   767 ;; This function calls:
+   768 ;;		Nothing
+   769 ;; This function is called by:
+   770 ;;		_main
+   771 ;; This function uses a non-reentrant model
+   772 ;;
+   773                           
+   774                           
+   775                           ;psect for function _init
+   776  06FB                     _init:	
+   777                           
+   778                           ;RAINBO.c: 16: OSCCON = 0b11110000;
+   779                           
+   780                           ;incstack = 0
+   781                           ; Regs used in _init: [wreg+status,2]
+   782  06FB  30F0               	movlw	240
+   783  06FC  0021               	movlb	1	; select bank1
+   784  06FD  0099               	movwf	25	;volatile
+   785  06FE                     l27:	
+   786                           ;RAINBO.c: 17: while(!PLLR);
+   787                           
+   788  06FE  1F1A               	btfss	26,6	;volatile
+   789  06FF  2EFE               	goto	l27
+   790                           
+   791                           ;RAINBO.c: 21: OPTION_REG = 0b00010000;
+   792  0700  3010               	movlw	16
+   793  0701  0095               	movwf	21	;volatile
    794                           
-   795  0768  1F1A               	btfss	26,6	;volatile
-   796  0769  2F68               	goto	l27
-   797                           
-   798                           ;RAINBO.c: 21: OPTION_REG = 0b00010000;
-   799  076A  3010               	movlw	16
-   800  076B  0095               	movwf	21	;volatile
-   801                           
-   802                           ;RAINBO.c: 23: PORTA = 0;
-   803  076C  0020               	movlb	0	; select bank0
-   804  076D  018C               	clrf	12	;volatile
-   805                           
-   806                           ;RAINBO.c: 24: LATA = 0;
-   807  076E  0022               	movlb	2	; select bank2
-   808  076F  018C               	clrf	12	;volatile
-   809                           
-   810                           ;RAINBO.c: 25: ANSELA = 0b00000011;
-   811  0770  3003               	movlw	3
-   812  0771  0023               	movlb	3	; select bank3
-   813  0772  008C               	movwf	12	;volatile
-   814                           
-   815                           ;RAINBO.c: 26: ADCON0 = 0b00000000;
-   816  0773  0021               	movlb	1	; select bank1
-   817  0774  019D               	clrf	29	;volatile
-   818                           
-   819                           ;RAINBO.c: 27: ADCON1 = 0b01100000;
-   820  0775  3060               	movlw	96
-   821  0776  009E               	movwf	30	;volatile
-   822                           
-   823                           ;RAINBO.c: 28: TRISA = 0b00001111;
-   824  0777  300F               	movlw	15
-   825  0778  008C               	movwf	12	;volatile
-   826                           
-   827                           ;RAINBO.c: 29: WPUA = 0b00001000;
-   828  0779  3008               	movlw	8
-   829  077A  0024               	movlb	4	; select bank4
-   830  077B  008C               	movwf	12	;volatile
-   831                           
-   832                           ;RAINBO.c: 31: WDTCON = 0b00001010;
-   833  077C  300A               	movlw	10
-   834  077D  0021               	movlb	1	; select bank1
-   835  077E  0097               	movwf	23	;volatile
-   836                           
-   837                           ;RAINBO.c: 35: INTCON = 0;
-   838  077F  018B               	clrf	11	;volatile
-   839  0780  0008               	return
-   840  0781                     __end_of_init:	
-   841  007E                     btemp	set	126	;btemp
-   842  007E                     wtemp0	set	126
+   795                           ;RAINBO.c: 23: PORTA = 0;
+   796  0702  0020               	movlb	0	; select bank0
+   797  0703  018C               	clrf	12	;volatile
+   798                           
+   799                           ;RAINBO.c: 24: LATA = 0;
+   800  0704  0022               	movlb	2	; select bank2
+   801  0705  018C               	clrf	12	;volatile
+   802                           
+   803                           ;RAINBO.c: 25: ANSELA = 0b00000011;
+   804  0706  3003               	movlw	3
+   805  0707  0023               	movlb	3	; select bank3
+   806  0708  008C               	movwf	12	;volatile
+   807                           
+   808                           ;RAINBO.c: 26: ADCON0 = 0b00000000;
+   809  0709  0021               	movlb	1	; select bank1
+   810  070A  019D               	clrf	29	;volatile
+   811                           
+   812                           ;RAINBO.c: 27: ADCON1 = 0b01100000;
+   813  070B  3060               	movlw	96
+   814  070C  009E               	movwf	30	;volatile
+   815                           
+   816                           ;RAINBO.c: 28: TRISA = 0b00001111;
+   817  070D  300F               	movlw	15
+   818  070E  008C               	movwf	12	;volatile
+   819                           
+   820                           ;RAINBO.c: 29: WPUA = 0b00001000;
+   821  070F  3008               	movlw	8
+   822  0710  0024               	movlb	4	; select bank4
+   823  0711  008C               	movwf	12	;volatile
+   824                           
+   825                           ;RAINBO.c: 31: WDTCON = 0b00001010;
+   826  0712  300A               	movlw	10
+   827  0713  0021               	movlb	1	; select bank1
+   828  0714  0097               	movwf	23	;volatile
+   829                           
+   830                           ;RAINBO.c: 35: INTCON = 0;
+   831  0715  018B               	clrf	11	;volatile
+   832  0716  0008               	return
+   833  0717                     __end_of_init:	
+   834                           
+   835                           	psect	text3
+   836  0785                     __ptext3:	
+   837 ;; *************** function _changeLEDS *****************
+   838 ;; Defined at:
+   839 ;;		line 81 in file "RAINBO-starter.c"
+   840 ;; Parameters:    Size  Location     Type
+   841 ;;		None
+   842 ;; Auto vars:     Size  Location     Type
+   843 ;;		None
+   844 ;; Return value:  Size  Location     Type
+   845 ;;                  1    wreg      void 
+   846 ;; Registers used:
+   847 ;;		wreg, fsr0l, fsr0h, status,2, status,0
+   848 ;; Tracked objects:
+   849 ;;		On entry : 0/0
+   850 ;;		On exit  : 0/0
+   851 ;;		Unchanged: 0/0
+   852 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   853 ;;      Params:         0       0       0       0
+   854 ;;      Locals:         0       0       0       0
+   855 ;;      Temps:          1       0       0       0
+   856 ;;      Totals:         1       0       0       0
+   857 ;;Total ram usage:        1 bytes
+   858 ;; Hardware stack levels used:    1
+   859 ;; This function calls:
+   860 ;;		Nothing
+   861 ;; This function is called by:
+   862 ;;		_main
+   863 ;; This function uses a non-reentrant model
+   864 ;;
+   865                           
+   866                           
+   867                           ;psect for function _changeLEDS
+   868  0785                     _changeLEDS:	
+   869                           
+   870                           ;RAINBO-starter.c: 82: if (red == 254 && blue == 0) type = 2;
+   871                           
+   872                           ;incstack = 0
+   873                           ; Regs used in _changeLEDS: [wreg-fsr0h+status,2+status,0]
+   874  0785  30FE               	movlw	254
+   875  0786  067D               	xorwf	_red,w
+   876  0787  1D03               	btfss	3,2
+   877  0788  2F90               	goto	l614
+   878  0789  087A               	movf	_blue,w
+   879  078A  1D03               	btfss	3,2
+   880  078B  2F90               	goto	l614
+   881  078C  3002               	movlw	2
+   882  078D  00F0               	movwf	??_changeLEDS
+   883  078E  0870               	movf	??_changeLEDS,w
+   884  078F  00FC               	movwf	_type
+   885  0790                     l614:	
+   886                           
+   887                           ;RAINBO-starter.c: 83: if (red == 254 && green == 254) type = 4;
+   888  0790  30FE               	movlw	254
+   889  0791  067D               	xorwf	_red,w
+   890  0792  1D03               	btfss	3,2
+   891  0793  2F9C               	goto	l620
+   892  0794  30FE               	movlw	254
+   893  0795  067B               	xorwf	_green,w
+   894  0796  1D03               	btfss	3,2
+   895  0797  2F9C               	goto	l620
+   896  0798  3004               	movlw	4
+   897  0799  00F0               	movwf	??_changeLEDS
+   898  079A  0870               	movf	??_changeLEDS,w
+   899  079B  00FC               	movwf	_type
+   900  079C                     l620:	
+   901                           
+   902                           ;RAINBO-starter.c: 84: if (green == 254 && red == 0) type = 3;
+   903  079C  30FE               	movlw	254
+   904  079D  067B               	xorwf	_green,w
+   905  079E  1D03               	btfss	3,2
+   906  079F  2FA7               	goto	l626
+   907  07A0  087D               	movf	_red,w
+   908  07A1  1D03               	btfss	3,2
+   909  07A2  2FA7               	goto	l626
+   910  07A3  3003               	movlw	3
+   911  07A4  00F0               	movwf	??_changeLEDS
+   912  07A5  0870               	movf	??_changeLEDS,w
+   913  07A6  00FC               	movwf	_type
+   914  07A7                     l626:	
+   915                           
+   916                           ;RAINBO-starter.c: 85: if (blue == 254) type = 5;
+   917  07A7  30FE               	movlw	254
+   918  07A8  067A               	xorwf	_blue,w
+   919  07A9  1D03               	btfss	3,2
+   920  07AA  2FAF               	goto	l630
+   921  07AB  3005               	movlw	5
+   922  07AC  00F0               	movwf	??_changeLEDS
+   923  07AD  0870               	movf	??_changeLEDS,w
+   924  07AE  00FC               	movwf	_type
+   925  07AF                     l630:	
+   926                           
+   927                           ;RAINBO-starter.c: 86: if (blue == 254 && green == 0) type = 1;
+   928  07AF  30FE               	movlw	254
+   929  07B0  067A               	xorwf	_blue,w
+   930  07B1  1D03               	btfss	3,2
+   931  07B2  2FB8               	goto	l636
+   932  07B3  087B               	movf	_green,w
+   933  07B4  1D03               	btfss	3,2
+   934  07B5  2FB8               	goto	l636
+   935  07B6  01FC               	clrf	_type
+   936  07B7  0AFC               	incf	_type,f
+   937  07B8                     l636:	
+   938                           
+   939                           ;RAINBO-starter.c: 87: if (blue == 254 && red == 254) type = 6;
+   940  07B8  30FE               	movlw	254
+   941  07B9  067A               	xorwf	_blue,w
+   942  07BA  1D03               	btfss	3,2
+   943  07BB  2FDD               	goto	l656
+   944  07BC  30FE               	movlw	254
+   945  07BD  067D               	xorwf	_red,w
+   946  07BE  1D03               	btfss	3,2
+   947  07BF  2FDD               	goto	l656
+   948  07C0  3006               	movlw	6
+   949  07C1  00F0               	movwf	??_changeLEDS
+   950  07C2  0870               	movf	??_changeLEDS,w
+   951  07C3  00FC               	movwf	_type
+   952                           
+   953                           ;RAINBO-starter.c: 88: switch (type) {
+   954  07C4  2FDD               	goto	l656
+   955  07C5                     l642:	
+   956                           ;RAINBO-starter.c: 89: case 1:
+   957                           
+   958                           
+   959                           ;RAINBO-starter.c: 90: red++;
+   960  07C5  3001               	movlw	1
+   961  07C6  00F0               	movwf	??_changeLEDS
+   962  07C7  0870               	movf	??_changeLEDS,w
+   963  07C8  07FD               	addwf	_red,f
+   964                           
+   965                           ;RAINBO-starter.c: 91: break;
+   966  07C9  0008               	return
+   967  07CA                     l644:	
+   968                           ;RAINBO-starter.c: 92: case 2:
+   969                           
+   970                           
+   971                           ;RAINBO-starter.c: 93: green++;
+   972  07CA  3001               	movlw	1
+   973  07CB  00F0               	movwf	??_changeLEDS
+   974  07CC  0870               	movf	??_changeLEDS,w
+   975  07CD  07FB               	addwf	_green,f
+   976                           
+   977                           ;RAINBO-starter.c: 94: break;
+   978  07CE  0008               	return
+   979  07CF                     l646:	
+   980                           ;RAINBO-starter.c: 95: case 3:
+   981                           
+   982                           
+   983                           ;RAINBO-starter.c: 96: blue++;
+   984  07CF  3001               	movlw	1
+   985  07D0  00F0               	movwf	??_changeLEDS
+   986  07D1  0870               	movf	??_changeLEDS,w
+   987  07D2  07FA               	addwf	_blue,f
+   988                           
+   989                           ;RAINBO-starter.c: 97: break;
+   990  07D3  0008               	return
+   991  07D4                     l648:	
+   992                           ;RAINBO-starter.c: 98: case 4:
+   993                           
+   994                           
+   995                           ;RAINBO-starter.c: 99: red--;
+   996  07D4  3001               	movlw	1
+   997  07D5  02FD               	subwf	_red,f
+   998                           
+   999                           ;RAINBO-starter.c: 100: break;
+  1000  07D6  0008               	return
+  1001  07D7                     l650:	
+  1002                           ;RAINBO-starter.c: 101: case 5:
+  1003                           
+  1004                           
+  1005                           ;RAINBO-starter.c: 102: green--;
+  1006  07D7  3001               	movlw	1
+  1007  07D8  02FB               	subwf	_green,f
+  1008                           
+  1009                           ;RAINBO-starter.c: 103: break;
+  1010  07D9  0008               	return
+  1011  07DA                     l652:	
+  1012                           ;RAINBO-starter.c: 104: case 6:
+  1013                           
+  1014                           
+  1015                           ;RAINBO-starter.c: 105: blue--;
+  1016  07DA  3001               	movlw	1
+  1017  07DB  02FA               	subwf	_blue,f
+  1018                           
+  1019                           ;RAINBO-starter.c: 107: }
+  1020                           
+  1021                           ;RAINBO-starter.c: 106: break;
+  1022  07DC  0008               	return
+  1023  07DD                     l656:	
+  1024  07DD  087C               	movf	_type,w
+  1025                           
+  1026                           ; Switch size 1, requested type "space"
+  1027                           ; Number of cases is 6, Range of values is 1 to 6
+  1028                           ; switch strategies available:
+  1029                           ; Name         Instructions Cycles
+  1030                           ; simple_byte           19    10 (average)
+  1031                           ; direct_byte           21     9 (fixed)
+  1032                           ; jumptable            263     9 (fixed)
+  1033                           ;	Chosen strategy is simple_byte
+  1034  07DE  3A01               	xorlw	1	; case 1
+  1035  07DF  1903               	skipnz
+  1036  07E0  2FC5               	goto	l642
+  1037  07E1  3A03               	xorlw	3	; case 2
+  1038  07E2  1903               	skipnz
+  1039  07E3  2FCA               	goto	l644
+  1040  07E4  3A01               	xorlw	1	; case 3
+  1041  07E5  1903               	skipnz
+  1042  07E6  2FCF               	goto	l646
+  1043  07E7  3A07               	xorlw	7	; case 4
+  1044  07E8  1903               	skipnz
+  1045  07E9  2FD4               	goto	l648
+  1046  07EA  3A01               	xorlw	1	; case 5
+  1047  07EB  1903               	skipnz
+  1048  07EC  2FD7               	goto	l650
+  1049  07ED  3A03               	xorlw	3	; case 6
+  1050  07EE  1903               	skipnz
+  1051  07EF  2FDA               	goto	l652
+  1052  07F0  2FF1               	goto	l90
+  1053  07F1                     l90:	
+  1054  07F1  0008               	return
+  1055  07F2                     __end_of_changeLEDS:	
+  1056  007E                     btemp	set	126	;btemp
+  1057  007E                     wtemp0	set	126
 
 
 Data Sizes:
     Strings     0
     Constant    1
     Data        2
-    BSS         6
+    BSS         4
     Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
     COMMON           14      8      14
-    BANK0            80      0       2
+    BANK0            80      0       0
     BANK1            80      0       0
     BANK2            80      0       0
 
@@ -898,6 +1113,7 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (0) _main                                                 3     3      0     270
                                               5 COMMON     3     3      0
+                         _changeLEDS
                                _init
                              _neoRGB
  ---------------------------------------------------------------------------------
@@ -906,12 +1122,16 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (1) _init                                                 0     0      0       0
  ---------------------------------------------------------------------------------
+ (1) _changeLEDS                                           1     1      0       0
+                                              0 COMMON     1     1      0
+ ---------------------------------------------------------------------------------
  Estimated maximum stack depth 1
  ---------------------------------------------------------------------------------
 
  Call Graph Graphs:
 
  _main (ROOT)
+   _changeLEDS
    _init
    _neoRGB
 
@@ -932,11 +1152,11 @@ SFR2                 0      0       0       3        0.0%
 STACK                0      0       0       3        0.0%
 BITSFR3              0      0       0       4        0.0%
 SFR3                 0      0       0       4        0.0%
-ABS                  0      0      10       4        0.0%
+ABS                  0      0       E       4        0.0%
 BITBANK0            50      0       0       5        0.0%
 BITSFR4              0      0       0       5        0.0%
 SFR4                 0      0       0       5        0.0%
-BANK0               50      0       2       6        2.5%
+BANK0               50      0       0       6        0.0%
 BITSFR5              0      0       0       6        0.0%
 SFR5                 0      0       0       6        0.0%
 BITBANK1            50      0       0       7        0.0%
@@ -953,7 +1173,7 @@ BITSFR9              0      0       0      10        0.0%
 SFR9                 0      0       0      10        0.0%
 BITSFR10             0      0       0      11        0.0%
 SFR10                0      0       0      11        0.0%
-DATA                 0      0      10      11        0.0%
+DATA                 0      0       E      11        0.0%
 BITSFR11             0      0       0      12        0.0%
 SFR11                0      0       0      12        0.0%
 BITSFR12             0      0       0      13        0.0%
@@ -999,36 +1219,41 @@ SFR31                0      0       0      32        0.0%
 
 
 Microchip Technology PIC Macro Assembler V1.42 build -159332390 
-Symbol Table                                                                                   Thu Oct 19 09:51:59 2017
+Symbol Table                                                                                   Wed Nov 08 10:54:56 2017
 
-                      _i 0078              __CFG_CP$OFF 0000                       l27 0768  
-                     l71 07B1                       l73 07C9                       l75 07E1  
-                     _GO 04E9                      LATA 010C                      l643 07ED  
-                    l635 07D5                      l627 07BD                      l649 078B  
-           __CFG_CPD$OFF 0000                      u197 0785                      _red 007B  
-           __CFG_BORV$LO 0000              neoRGB@green 0070                      wreg 0009  
-           __CFG_LVP$OFF 0000                     _ADON 04E8                     _LATA 010C  
-                   _PLLR 04D6                     _WPUA 020C             __CFG_WRT$OFF 0000  
-                   _blue 007C                     _main 0781                     _init 0765  
-                   _temp 0020                     fsr0h 0005                     indf0 0000  
-                   fsr0l 0004                     btemp 007E                     start 0002  
-          __CFG_IESO$OFF 0000            __CFG_PLLEN$ON 0000                    ?_main 0070  
-                  ?_init 0070                    _PORTA 000C                    _TRISA 008C  
-          __CFG_PWRTE$ON 0000           __CFG_FCMEN$OFF 0000          __end_of_maxLEDs 0801  
-                  _green 007D           __CFG_BOREN$OFF 0000                    status 0003  
-                  wtemp0 007E           __CFG_MCLRE$OFF 0000          __initialization 07F0  
-           __end_of_main 07A1             __end_of_init 0781                   ??_main 0075  
-                 ??_init 0070                   _ADCON0 009D                   _ADCON1 009E  
-                 _ADRESH 009C                   _ANSELA 018C                   _INTCON 000B  
-                 _OSCCON 0099                   _WDTCON 0097           __CFG_STVREN$ON 0000  
-                 _neoRGB 07A1             __pdataCOMMON 007C  __end_of__initialization 07FD  
-         __pcstackCOMMON 0070               __pbssBANK0 0020               __pmaintext 0781  
-                ?_neoRGB 0070          __size_of_neoRGB 004F                  __ptext1 07A1  
-                __ptext2 0765                  _maxLEDs 0800                  _tempRed 007A  
+                      _i 0078              __CFG_CP$OFF 0000                       l27 06FE  
+                     l71 0776                       l90 07F1                       l67 0748  
+                     l69 075F                       _GO 04E9                      LATA 010C  
+                    l620 079C                      l700 076B                      l630 07AF  
+                    l614 0790                      l650 07D7                      l642 07C5  
+                    l626 07A7                      l714 0721                      l652 07DA  
+                    l644 07CA                      l636 07B8                      l708 0782  
+                    l646 07CF                      l648 07D4                      l656 07DD  
+                    l692 0754                      u307 071B             __CFG_CPD$OFF 0000  
+                    _red 007D             __CFG_BORV$LO 0000              neoRGB@green 0070  
+                    wreg 0009             __CFG_LVP$OFF 0000                     _ADON 04E8  
+                   _LATA 010C                     _PLLR 04D6                     _WPUA 020C  
+           __CFG_WRT$OFF 0000                     _blue 007A                     _main 0717  
+                   _init 06FB                     _temp 0079                     fsr0h 0005  
+                   indf0 0000                     fsr0l 0004                     btemp 007E  
+                   _type 007C                     start 0002            __CFG_IESO$OFF 0000  
+          __CFG_PLLEN$ON 0000                    ?_main 0070                    ?_init 0070  
+                  _PORTA 000C                    _TRISA 008C            __CFG_PWRTE$ON 0000  
+         __CFG_FCMEN$OFF 0000          __end_of_maxLEDs 0801                    _green 007B  
+         __CFG_BOREN$OFF 0000                    status 0003                    wtemp0 007E  
+         __CFG_MCLRE$OFF 0000          __initialization 07F2             __end_of_main 0739  
+           __end_of_init 0717                   ??_main 0075                   ??_init 0070  
+                 _ADCON0 009D                   _ADCON1 009E                   _ADRESH 009C  
+                 _ANSELA 018C                   _INTCON 000B                   _OSCCON 0099  
+                 _WDTCON 0097           __CFG_STVREN$ON 0000                   _neoRGB 0739  
+           __pdataCOMMON 007C  __end_of__initialization 07FD           __pcstackCOMMON 0070  
+             _changeLEDS 0785               __pmaintext 0717                  ?_neoRGB 0070  
+        __size_of_neoRGB 004C                  __ptext1 0739                  __ptext2 06FB  
+                __ptext3 0785                  _maxLEDs 0800              ?_changeLEDS 0070  
    end_of_initialization 07FD         __CFG_FOSC$INTOSC 0000               neoRGB@blue 0071  
-             neoRGB@leds 0072            __pidataCOMMON 0763           __end_of_neoRGB 07F0  
-    start_initialization 07F0                 ??_neoRGB 0073              __pbssCOMMON 0078  
-              ___latbits 0001         __CFG_WDTE$SWDTEN 0000                _tempGreen 0079  
-              neoRGB@red 0074            __size_of_main 0020            __size_of_init 001C  
-               _tempBlue 0021        __CFG_CLKOUTEN$OFF 0000            __pstringtext1 0800  
-             _OPTION_REG 0095  
+             neoRGB@leds 0072      __size_of_changeLEDS 006D            __pidataCOMMON 06F9  
+         __end_of_neoRGB 0785      start_initialization 07F2                 ??_neoRGB 0073  
+            __pbssCOMMON 0078                ___latbits 0001         __CFG_WDTE$SWDTEN 0000  
+           ??_changeLEDS 0070       __end_of_changeLEDS 07F2                neoRGB@red 0074  
+          __size_of_main 0022            __size_of_init 001C        __CFG_CLKOUTEN$OFF 0000  
+          __pstringtext1 0800               _OPTION_REG 0095  
