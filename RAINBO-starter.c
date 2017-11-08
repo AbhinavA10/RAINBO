@@ -15,7 +15,7 @@
 
 // Byte variables for neopixel functions
 
-unsigned char red = 0; // RGB colour bytes and default starting colour
+unsigned char red = 254; // RGB colour bytes and default starting colour
 unsigned char green = 0;
 unsigned char blue = 0;
 
@@ -80,11 +80,10 @@ void neoRGB(unsigned char red, unsigned char green, unsigned char blue, unsigned
 
 void changeLEDS() {
     if (red == 254 && blue == 0) type = 'IG';
-    if (green == 254) type = 'DR';
+    if (red == 254 && green == 254) type = 'DR';
     if (green == 254 && red == 0) type = 'IB';
     if (blue == 254) type = 'DG';
     if (blue == 254 && green == 0) type = 'IR';
-    if (red == 254) type = 'IG';
     switch (type) {
         case "IR":
             red++;
