@@ -1,0 +1,1082 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.41 build -162212810 
+                                                                                               Fri Nov 10 22:01:56 2017
+
+Microchip Technology Omniscient Code Generator v1.41 (Free mode) build 201701250102
+     1                           	processor	12F1840
+     2                           	opt	pw 120
+     3                           	opt	lm
+     4                           	psect	idataCOMMON,global,class=CODE,delta=2
+     5                           	psect	idataBANK0,global,class=CODE,delta=2
+     6                           	psect	stringtext,global,class=STRCODE,delta=2
+     7                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     8                           	psect	bssCOMMON,global,class=COMMON,space=1,delta=1
+     9                           	psect	dataCOMMON,global,class=COMMON,space=1,delta=1
+    10                           	psect	dataBANK0,global,class=BANK0,space=1,delta=1
+    11                           	psect	inittext,global,class=CODE,delta=2
+    12                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    13                           	psect	maintext,global,class=CODE,merge=1,split=1,delta=2
+    14                           	psect	text1,local,class=CODE,merge=1,delta=2
+    15                           	psect	text2,local,class=CODE,merge=1,delta=2
+    16                           	dabs	1,0x7E,2
+    17  0000                     
+    18                           ; Version 1.41
+    19                           ; Generated 25/01/2017 GMT
+    20                           ; 
+    21                           ; Copyright © 2017, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    22                           ; All rights reserved.
+    23                           ; 
+    24                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    25                           ; 
+    26                           ; Redistribution and use in source and binary forms, with or without modification, are
+    27                           ; permitted provided that the following conditions are met:
+    28                           ; 
+    29                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    30                           ;        conditions and the following disclaimer.
+    31                           ; 
+    32                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    33                           ;        of conditions and the following disclaimer in the documentation and/or other
+    34                           ;        materials provided with the distribution.
+    35                           ; 
+    36                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    37                           ;        software without specific prior written permission.
+    38                           ; 
+    39                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    40                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    41                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    42                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    43                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    44                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    45                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    46                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    47                           ; 
+    48                           ; 
+    49                           ; Code-generator required, PIC12F1840 Definitions
+    50                           ; 
+    51                           ; SFR Addresses
+    52  0000                     	;# 
+    53  0001                     	;# 
+    54  0002                     	;# 
+    55  0003                     	;# 
+    56  0004                     	;# 
+    57  0005                     	;# 
+    58  0006                     	;# 
+    59  0007                     	;# 
+    60  0008                     	;# 
+    61  0009                     	;# 
+    62  000A                     	;# 
+    63  000B                     	;# 
+    64  000C                     	;# 
+    65  0011                     	;# 
+    66  0012                     	;# 
+    67  0015                     	;# 
+    68  0016                     	;# 
+    69  0016                     	;# 
+    70  0017                     	;# 
+    71  0018                     	;# 
+    72  0019                     	;# 
+    73  001A                     	;# 
+    74  001B                     	;# 
+    75  001C                     	;# 
+    76  001E                     	;# 
+    77  001F                     	;# 
+    78  008C                     	;# 
+    79  0091                     	;# 
+    80  0092                     	;# 
+    81  0095                     	;# 
+    82  0096                     	;# 
+    83  0097                     	;# 
+    84  0098                     	;# 
+    85  0099                     	;# 
+    86  009A                     	;# 
+    87  009B                     	;# 
+    88  009B                     	;# 
+    89  009C                     	;# 
+    90  009D                     	;# 
+    91  009E                     	;# 
+    92  010C                     	;# 
+    93  0111                     	;# 
+    94  0112                     	;# 
+    95  0115                     	;# 
+    96  0116                     	;# 
+    97  0117                     	;# 
+    98  0118                     	;# 
+    99  0119                     	;# 
+   100  011A                     	;# 
+   101  011B                     	;# 
+   102  011D                     	;# 
+   103  011D                     	;# 
+   104  018C                     	;# 
+   105  0191                     	;# 
+   106  0191                     	;# 
+   107  0192                     	;# 
+   108  0193                     	;# 
+   109  0193                     	;# 
+   110  0193                     	;# 
+   111  0194                     	;# 
+   112  0195                     	;# 
+   113  0196                     	;# 
+   114  0197                     	;# 
+   115  0199                     	;# 
+   116  019A                     	;# 
+   117  019B                     	;# 
+   118  019B                     	;# 
+   119  019B                     	;# 
+   120  019B                     	;# 
+   121  019C                     	;# 
+   122  019C                     	;# 
+   123  019D                     	;# 
+   124  019E                     	;# 
+   125  019F                     	;# 
+   126  020C                     	;# 
+   127  0211                     	;# 
+   128  0211                     	;# 
+   129  0212                     	;# 
+   130  0212                     	;# 
+   131  0213                     	;# 
+   132  0213                     	;# 
+   133  0214                     	;# 
+   134  0214                     	;# 
+   135  0215                     	;# 
+   136  0215                     	;# 
+   137  0215                     	;# 
+   138  0216                     	;# 
+   139  0216                     	;# 
+   140  0217                     	;# 
+   141  0217                     	;# 
+   142  0291                     	;# 
+   143  0291                     	;# 
+   144  0292                     	;# 
+   145  0293                     	;# 
+   146  0294                     	;# 
+   147  0295                     	;# 
+   148  0295                     	;# 
+   149  0296                     	;# 
+   150  0391                     	;# 
+   151  0392                     	;# 
+   152  0393                     	;# 
+   153  039A                     	;# 
+   154  039C                     	;# 
+   155  039D                     	;# 
+   156  039E                     	;# 
+   157  039F                     	;# 
+   158  0FE4                     	;# 
+   159  0FE5                     	;# 
+   160  0FE6                     	;# 
+   161  0FE7                     	;# 
+   162  0FE8                     	;# 
+   163  0FE9                     	;# 
+   164  0FEA                     	;# 
+   165  0FEB                     	;# 
+   166  0FED                     	;# 
+   167  0FEE                     	;# 
+   168  0FEF                     	;# 
+   169  0000                     	;# 
+   170  0001                     	;# 
+   171  0002                     	;# 
+   172  0003                     	;# 
+   173  0004                     	;# 
+   174  0005                     	;# 
+   175  0006                     	;# 
+   176  0007                     	;# 
+   177  0008                     	;# 
+   178  0009                     	;# 
+   179  000A                     	;# 
+   180  000B                     	;# 
+   181  000C                     	;# 
+   182  0011                     	;# 
+   183  0012                     	;# 
+   184  0015                     	;# 
+   185  0016                     	;# 
+   186  0016                     	;# 
+   187  0017                     	;# 
+   188  0018                     	;# 
+   189  0019                     	;# 
+   190  001A                     	;# 
+   191  001B                     	;# 
+   192  001C                     	;# 
+   193  001E                     	;# 
+   194  001F                     	;# 
+   195  008C                     	;# 
+   196  0091                     	;# 
+   197  0092                     	;# 
+   198  0095                     	;# 
+   199  0096                     	;# 
+   200  0097                     	;# 
+   201  0098                     	;# 
+   202  0099                     	;# 
+   203  009A                     	;# 
+   204  009B                     	;# 
+   205  009B                     	;# 
+   206  009C                     	;# 
+   207  009D                     	;# 
+   208  009E                     	;# 
+   209  010C                     	;# 
+   210  0111                     	;# 
+   211  0112                     	;# 
+   212  0115                     	;# 
+   213  0116                     	;# 
+   214  0117                     	;# 
+   215  0118                     	;# 
+   216  0119                     	;# 
+   217  011A                     	;# 
+   218  011B                     	;# 
+   219  011D                     	;# 
+   220  011D                     	;# 
+   221  018C                     	;# 
+   222  0191                     	;# 
+   223  0191                     	;# 
+   224  0192                     	;# 
+   225  0193                     	;# 
+   226  0193                     	;# 
+   227  0193                     	;# 
+   228  0194                     	;# 
+   229  0195                     	;# 
+   230  0196                     	;# 
+   231  0197                     	;# 
+   232  0199                     	;# 
+   233  019A                     	;# 
+   234  019B                     	;# 
+   235  019B                     	;# 
+   236  019B                     	;# 
+   237  019B                     	;# 
+   238  019C                     	;# 
+   239  019C                     	;# 
+   240  019D                     	;# 
+   241  019E                     	;# 
+   242  019F                     	;# 
+   243  020C                     	;# 
+   244  0211                     	;# 
+   245  0211                     	;# 
+   246  0212                     	;# 
+   247  0212                     	;# 
+   248  0213                     	;# 
+   249  0213                     	;# 
+   250  0214                     	;# 
+   251  0214                     	;# 
+   252  0215                     	;# 
+   253  0215                     	;# 
+   254  0215                     	;# 
+   255  0216                     	;# 
+   256  0216                     	;# 
+   257  0217                     	;# 
+   258  0217                     	;# 
+   259  0291                     	;# 
+   260  0291                     	;# 
+   261  0292                     	;# 
+   262  0293                     	;# 
+   263  0294                     	;# 
+   264  0295                     	;# 
+   265  0295                     	;# 
+   266  0296                     	;# 
+   267  0391                     	;# 
+   268  0392                     	;# 
+   269  0393                     	;# 
+   270  039A                     	;# 
+   271  039C                     	;# 
+   272  039D                     	;# 
+   273  039E                     	;# 
+   274  039F                     	;# 
+   275  0FE4                     	;# 
+   276  0FE5                     	;# 
+   277  0FE6                     	;# 
+   278  0FE7                     	;# 
+   279  0FE8                     	;# 
+   280  0FE9                     	;# 
+   281  0FEA                     	;# 
+   282  0FEB                     	;# 
+   283  0FED                     	;# 
+   284  0FEE                     	;# 
+   285  0FEF                     	;# 
+   286  0000                     	;# 
+   287  0001                     	;# 
+   288  0002                     	;# 
+   289  0003                     	;# 
+   290  0004                     	;# 
+   291  0005                     	;# 
+   292  0006                     	;# 
+   293  0007                     	;# 
+   294  0008                     	;# 
+   295  0009                     	;# 
+   296  000A                     	;# 
+   297  000B                     	;# 
+   298  000C                     	;# 
+   299  0011                     	;# 
+   300  0012                     	;# 
+   301  0015                     	;# 
+   302  0016                     	;# 
+   303  0016                     	;# 
+   304  0017                     	;# 
+   305  0018                     	;# 
+   306  0019                     	;# 
+   307  001A                     	;# 
+   308  001B                     	;# 
+   309  001C                     	;# 
+   310  001E                     	;# 
+   311  001F                     	;# 
+   312  008C                     	;# 
+   313  0091                     	;# 
+   314  0092                     	;# 
+   315  0095                     	;# 
+   316  0096                     	;# 
+   317  0097                     	;# 
+   318  0098                     	;# 
+   319  0099                     	;# 
+   320  009A                     	;# 
+   321  009B                     	;# 
+   322  009B                     	;# 
+   323  009C                     	;# 
+   324  009D                     	;# 
+   325  009E                     	;# 
+   326  010C                     	;# 
+   327  0111                     	;# 
+   328  0112                     	;# 
+   329  0115                     	;# 
+   330  0116                     	;# 
+   331  0117                     	;# 
+   332  0118                     	;# 
+   333  0119                     	;# 
+   334  011A                     	;# 
+   335  011B                     	;# 
+   336  011D                     	;# 
+   337  011D                     	;# 
+   338  018C                     	;# 
+   339  0191                     	;# 
+   340  0191                     	;# 
+   341  0192                     	;# 
+   342  0193                     	;# 
+   343  0193                     	;# 
+   344  0193                     	;# 
+   345  0194                     	;# 
+   346  0195                     	;# 
+   347  0196                     	;# 
+   348  0197                     	;# 
+   349  0199                     	;# 
+   350  019A                     	;# 
+   351  019B                     	;# 
+   352  019B                     	;# 
+   353  019B                     	;# 
+   354  019B                     	;# 
+   355  019C                     	;# 
+   356  019C                     	;# 
+   357  019D                     	;# 
+   358  019E                     	;# 
+   359  019F                     	;# 
+   360  020C                     	;# 
+   361  0211                     	;# 
+   362  0211                     	;# 
+   363  0212                     	;# 
+   364  0212                     	;# 
+   365  0213                     	;# 
+   366  0213                     	;# 
+   367  0214                     	;# 
+   368  0214                     	;# 
+   369  0215                     	;# 
+   370  0215                     	;# 
+   371  0215                     	;# 
+   372  0216                     	;# 
+   373  0216                     	;# 
+   374  0217                     	;# 
+   375  0217                     	;# 
+   376  0291                     	;# 
+   377  0291                     	;# 
+   378  0292                     	;# 
+   379  0293                     	;# 
+   380  0294                     	;# 
+   381  0295                     	;# 
+   382  0295                     	;# 
+   383  0296                     	;# 
+   384  0391                     	;# 
+   385  0392                     	;# 
+   386  0393                     	;# 
+   387  039A                     	;# 
+   388  039C                     	;# 
+   389  039D                     	;# 
+   390  039E                     	;# 
+   391  039F                     	;# 
+   392  0FE4                     	;# 
+   393  0FE5                     	;# 
+   394  0FE6                     	;# 
+   395  0FE7                     	;# 
+   396  0FE8                     	;# 
+   397  0FE9                     	;# 
+   398  0FEA                     	;# 
+   399  0FEB                     	;# 
+   400  0FED                     	;# 
+   401  0FEE                     	;# 
+   402  0FEF                     	;# 
+   403                           
+   404                           	psect	idataCOMMON
+   405  0735                     __pidataCOMMON:	
+   406                           
+   407                           ;initializer for _type
+   408  0735  3402               	retlw	2
+   409                           
+   410                           ;initializer for _cGreen
+   411  0736  34FE               	retlw	254
+   412                           
+   413                           ;initializer for _cRed
+   414  0737  34FE               	retlw	254
+   415                           
+   416                           	psect	idataBANK0
+   417  073E                     __pidataBANK0:	
+   418                           
+   419                           ;initializer for _arcColours
+   420  073E  34FF               	retlw	255
+   421  073F  34FF               	retlw	255
+   422  0740  34FF               	retlw	255
+   423  0741  3400               	retlw	0
+   424  0742  3400               	retlw	0
+   425  0743  34EE               	retlw	238
+   426  0744  3400               	retlw	0
+   427  0745  348C               	retlw	140
+   428  0746  34D7               	retlw	215
+   429  0747  34FF               	retlw	255
+   430  0748  3400               	retlw	0
+   431  0749  3482               	retlw	130
+   432  074A  3400               	retlw	0
+   433  074B  3400               	retlw	0
+   434  074C  3400               	retlw	0
+   435  074D  3400               	retlw	0
+   436  074E  34FF               	retlw	255
+   437  074F  34EE               	retlw	238
+   438                           
+   439                           	psect	stringtext
+   440  0800                     __pstringtext:	
+   441  0800                     _maxLEDs:	
+   442  0800  341E               	retlw	30
+   443  0801                     __end_of_maxLEDs:	
+   444  000B                     _INTCON	set	11
+   445  000C                     _PORTA	set	12
+   446  009C                     _ADRESH	set	156
+   447  0097                     _WDTCON	set	151
+   448  008C                     _TRISA	set	140
+   449  009E                     _ADCON1	set	158
+   450  009D                     _ADCON0	set	157
+   451  0095                     _OPTION_REG	set	149
+   452  0099                     _OSCCON	set	153
+   453  04E9                     _GO	set	1257
+   454  04E8                     _ADON	set	1256
+   455  010C                     _LATA	set	268
+   456  018C                     _ANSELA	set	396
+   457  020C                     _WPUA	set	524
+   458                           
+   459                           ; #config settings
+   460  0000                     
+   461                           	psect	cinit
+   462  07E2                     start_initialization:	
+   463  07E2                     __initialization:	
+   464                           
+   465                           ; Initialize objects allocated to COMMON
+   466  07E2  3035               	movlw	low __pidataCOMMON
+   467  07E3  0084               	movwf	4
+   468  07E4  3087               	movlw	(high __pidataCOMMON)| (0+128)
+   469  07E5  0085               	movwf	5
+   470  07E6  3074               	movlw	low __pdataCOMMON
+   471  07E7  0086               	movwf	6
+   472  07E8  3000               	movlw	high __pdataCOMMON
+   473  07E9  0087               	movwf	7
+   474  07EA  3003               	movlw	3
+   475  07EB  3187  2738  3187   	fcall	init_ram
+   476                           
+   477                           ; Initialize objects allocated to BANK0
+   478  07EE  303E               	movlw	low __pidataBANK0
+   479  07EF  0084               	movwf	4
+   480  07F0  3087               	movlw	(high __pidataBANK0)| (0+128)
+   481  07F1  0085               	movwf	5
+   482  07F2  3020               	movlw	low __pdataBANK0
+   483  07F3  0086               	movwf	6
+   484  07F4  3000               	movlw	high __pdataBANK0
+   485  07F5  0087               	movwf	7
+   486  07F6  3012               	movlw	18
+   487  07F7  3187  2738         	fcall	init_ram
+   488                           
+   489                           ; Clear objects allocated to COMMON
+   490  07F9  01F0               	clrf	__pbssCOMMON& (0+127)
+   491  07FA  01F1               	clrf	(__pbssCOMMON+1)& (0+127)
+   492  07FB  01F2               	clrf	(__pbssCOMMON+2)& (0+127)
+   493  07FC  01F3               	clrf	(__pbssCOMMON+3)& (0+127)
+   494  07FD                     end_of_initialization:	
+   495                           ;End of C runtime variable initialization code
+   496                           
+   497  07FD                     __end_of__initialization:	
+   498  07FD  0020               	movlb	0
+   499  07FE  3187  2F50         	ljmp	_main	;jump to C main() function
+   500                           
+   501                           	psect	bssCOMMON
+   502  0070                     __pbssCOMMON:	
+   503  0070                     _i:	
+   504  0070                     	ds	1
+   505  0071                     _temp:	
+   506  0071                     	ds	1
+   507  0072                     _index:	
+   508  0072                     	ds	1
+   509  0073                     _cBlue:	
+   510  0073                     	ds	1
+   511                           
+   512                           	psect	dataCOMMON
+   513  0074                     __pdataCOMMON:	
+   514  0074                     _type:	
+   515  0074                     	ds	1
+   516  0075                     _cGreen:	
+   517  0075                     	ds	1
+   518  0076                     _cRed:	
+   519  0076                     	ds	1
+   520                           
+   521                           	psect	dataBANK0
+   522  0020                     __pdataBANK0:	
+   523  0020                     _arcColours:	
+   524  0020                     	ds	18
+   525                           
+   526                           	psect	inittext
+   527  0738                     init_ram:	
+   528  0738  00FE               	movwf	126
+   529  0739                     initloop:	
+   530  0739  0012               	moviw fsr0++
+   531  073A  001E               	movwi fsr1++
+   532  073B  0BFE               	decfsz	126,f
+   533  073C  2F39               	goto	initloop
+   534  073D  3400               	retlw	0
+   535                           
+   536                           	psect	cstackCOMMON
+   537  0077                     __pcstackCOMMON:	
+   538  0077                     ?_init:	
+   539  0077                     ??_init:	
+   540                           ; 1 bytes @ 0x0
+   541                           
+   542  0077                     ?_neoArray:	
+   543                           ; 1 bytes @ 0x0
+   544                           
+   545  0077                     ??_neoArray:	
+   546                           ; 1 bytes @ 0x0
+   547                           
+   548  0077                     ?_main:	
+   549                           ; 1 bytes @ 0x0
+   550                           
+   551                           
+   552                           ; 2 bytes @ 0x0
+   553  0077                     	ds	1
+   554  0078                     neoArray@leds:	
+   555                           
+   556                           ; 1 bytes @ 0x1
+   557  0078                     	ds	1
+   558  0079                     ??_main:	
+   559                           
+   560                           	psect	maintext
+   561  0750                     __pmaintext:	
+   562                           ; 1 bytes @ 0x2
+   563 ;;
+   564 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   565 ;;
+   566 ;; *************** function _main *****************
+   567 ;; Defined at:
+   568 ;;		line 166 in file "RAINBO-starter.c"
+   569 ;; Parameters:    Size  Location     Type
+   570 ;;		None
+   571 ;; Auto vars:     Size  Location     Type
+   572 ;;		None
+   573 ;; Return value:  Size  Location     Type
+   574 ;;                  2  103[None  ] int 
+   575 ;; Registers used:
+   576 ;;		wreg, fsr0l, fsr0h, fsr1l, fsr1h, status,2, status,0, pclath, cstack
+   577 ;; Tracked objects:
+   578 ;;		On entry : B1F/0
+   579 ;;		On exit  : 0/0
+   580 ;;		Unchanged: 0/0
+   581 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   582 ;;      Params:         0       0       0       0
+   583 ;;      Locals:         0       0       0       0
+   584 ;;      Temps:          0       0       0       0
+   585 ;;      Totals:         0       0       0       0
+   586 ;;Total ram usage:        0 bytes
+   587 ;; Hardware stack levels required when called:    1
+   588 ;; This function calls:
+   589 ;;		_init
+   590 ;;		_neoArray
+   591 ;; This function is called by:
+   592 ;;		Startup code after reset
+   593 ;; This function uses a non-reentrant model
+   594 ;;
+   595                           
+   596                           
+   597                           ;psect for function _main
+   598  0750                     _main:	
+   599                           
+   600                           ;RAINBO-starter.c: 168: init();
+   601                           
+   602                           ;incstack = 0
+   603                           ; Regs used in _main: [wreg-fsr1h+status,2+status,0+pclath+cstack]
+   604  0750  3187  2767  3187   	fcall	_init
+   605                           
+   606                           ;RAINBO-starter.c: 169: _delay((unsigned long)((200)*(32000000/4000000.0)));
+   607  0753  30E4               	movlw	228
+   608  0754                     u377:	
+   609  0754  3200               	nop2
+   610  0755  3200               	nop2
+   611  0756  0B89               	decfsz	9,f
+   612  0757  2F54               	goto	u377
+   613  0758  3200               	nop2
+   614  0759  3200               	nop2
+   615  075A                     l739:	
+   616                           ;RAINBO-starter.c: 172: while (1) {
+   617                           
+   618                           
+   619                           ;RAINBO-starter.c: 174: neoArray(maxLEDs);
+   620  075A  3000               	movlw	low (_maxLEDs| (0+32768))
+   621  075B  0084               	movwf	4
+   622  075C  3088               	movlw	high (_maxLEDs| (0+32768))
+   623  075D  0085               	movwf	5
+   624  075E  0800               	movf	0,w	;code access
+   625  075F  3187  2781  3187   	fcall	_neoArray
+   626                           
+   627                           ;RAINBO-starter.c: 177: _delay((unsigned long)((50)*(32000000/4000000.0)));
+   628  0762  3085               	movlw	133
+   629  0763                     u387:	
+   630  0763  0B89               	decfsz	9,f
+   631  0764  2F63               	goto	u387
+   632  0765  0000               	nop
+   633  0766  2F5A               	goto	l739
+   634  0767                     __end_of_main:	
+   635                           
+   636                           	psect	text1
+   637  0781                     __ptext1:	
+   638 ;; *************** function _neoArray *****************
+   639 ;; Defined at:
+   640 ;;		line 93 in file "RAINBO-starter.c"
+   641 ;; Parameters:    Size  Location     Type
+   642 ;;  leds            1    wreg     unsigned char 
+   643 ;; Auto vars:     Size  Location     Type
+   644 ;;  leds            1    1[COMMON] unsigned char 
+   645 ;; Return value:  Size  Location     Type
+   646 ;;                  1    wreg      void 
+   647 ;; Registers used:
+   648 ;;		wreg, fsr1l, fsr1h, status,2, status,0
+   649 ;; Tracked objects:
+   650 ;;		On entry : 0/0
+   651 ;;		On exit  : 0/0
+   652 ;;		Unchanged: 0/0
+   653 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   654 ;;      Params:         0       0       0       0
+   655 ;;      Locals:         1       0       0       0
+   656 ;;      Temps:          1       0       0       0
+   657 ;;      Totals:         2       0       0       0
+   658 ;;Total ram usage:        2 bytes
+   659 ;; Hardware stack levels used:    1
+   660 ;; This function calls:
+   661 ;;		Nothing
+   662 ;; This function is called by:
+   663 ;;		_main
+   664 ;; This function uses a non-reentrant model
+   665 ;;
+   666                           
+   667                           
+   668                           ;psect for function _neoArray
+   669  0781                     _neoArray:	
+   670                           
+   671                           ;incstack = 0
+   672                           ; Regs used in _neoArray: [wreg+fsr1l+fsr1h+status,2+status,0]
+   673                           ;neoArray@leds stored from wreg
+   674  0781  00F8               	movwf	neoArray@leds
+   675                           
+   676                           ;RAINBO-starter.c: 94: index = 0;
+   677  0782  01F2               	clrf	_index
+   678  0783                     L1:	
+   679  0783  0878               	movf	neoArray@leds,w
+   680  0784  1903               	btfsc	3,2
+   681  0785  0008               	return
+   682                           
+   683                           ;RAINBO-starter.c: 96: {
+   684                           ;RAINBO-starter.c: 97: index++;
+   685  0786  3001               	movlw	1
+   686  0787  00F7               	movwf	??_neoArray
+   687  0788  0877               	movf	??_neoArray,w
+   688  0789  07F2               	addwf	_index,f
+   689                           
+   690                           ;RAINBO-starter.c: 98: if (index == 6) {
+   691  078A  3006               	movlw	6
+   692  078B  0672               	xorwf	_index,w
+   693  078C  1903               	btfsc	3,2
+   694                           
+   695                           ;RAINBO-starter.c: 99: index = 0;
+   696  078D  01F2               	clrf	_index
+   697                           
+   698                           ;RAINBO-starter.c: 100: }
+   699                           ;RAINBO-starter.c: 101: temp = arcColours[1][index];
+   700  078E  0872               	movf	_index,w
+   701  078F  3E26               	addlw	(low ((_arcColours| 0+6)))& (0+255)
+   702  0790  0086               	movwf	6
+   703  0791  0187               	clrf	7
+   704  0792  0801               	movf	1,w
+   705  0793  00F7               	movwf	??_neoArray
+   706  0794  0877               	movf	??_neoArray,w
+   707  0795  00F1               	movwf	_temp
+   708                           
+   709                           ;RAINBO-starter.c: 103: for (i = 8; i != 0; i--)
+   710  0796  3008               	movlw	8
+   711  0797  00F7               	movwf	??_neoArray
+   712  0798  0877               	movf	??_neoArray,w
+   713  0799  00F0               	movwf	_i
+   714  079A  0870               	movf	_i,w
+   715  079B  1903               	btfsc	3,2
+   716  079C  2FA9               	goto	l605
+   717  079D                     l78:	
+   718  079D  160C               	bsf	268,4	;# 
+   719  079E  0000               	nop	;# 
+   720  079F  1FF1               	btfss	_temp,7	;# 
+   721  07A0  120C               	bcf	268,4	;# 
+   722  07A1  0000               	nop	;# 
+   723  07A2  35F1               	lslf	_temp,f	;# 
+   724  07A3  120C               	bcf	268,4	;# 
+   725  07A4  3001               	movlw	1
+   726  07A5  02F0               	subwf	_i,f
+   727  07A6  0870               	movf	_i,w
+   728  07A7  1D03               	btfss	3,2
+   729  07A8  2F9D               	goto	l78
+   730  07A9                     l605:	
+   731                           
+   732                           ;RAINBO-starter.c: 112: }
+   733                           ;RAINBO-starter.c: 113: temp = arcColours[0][index];
+   734  07A9  0872               	movf	_index,w
+   735  07AA  3E20               	addlw	(low (_arcColours| 0))& (0+255)
+   736  07AB  0086               	movwf	6
+   737  07AC  0187               	clrf	7
+   738  07AD  0801               	movf	1,w
+   739  07AE  00F7               	movwf	??_neoArray
+   740  07AF  0877               	movf	??_neoArray,w
+   741  07B0  00F1               	movwf	_temp
+   742                           
+   743                           ;RAINBO-starter.c: 114: for (i = 8; i != 0; i--) {
+   744  07B1  3008               	movlw	8
+   745  07B2  00F7               	movwf	??_neoArray
+   746  07B3  0877               	movf	??_neoArray,w
+   747  07B4  00F0               	movwf	_i
+   748  07B5  0870               	movf	_i,w
+   749  07B6  1903               	btfsc	3,2
+   750  07B7  2FC4               	goto	l615
+   751  07B8                     l80:	
+   752  07B8  160C               	bsf	268,4	;# 
+   753  07B9  0000               	nop	;# 
+   754  07BA  1FF1               	btfss	_temp,7	;# 
+   755  07BB  120C               	bcf	268,4	;# 
+   756  07BC  0000               	nop	;# 
+   757  07BD  35F1               	lslf	_temp,f	;# 
+   758  07BE  120C               	bcf	268,4	;# 
+   759  07BF  3001               	movlw	1
+   760  07C0  02F0               	subwf	_i,f
+   761  07C1  0870               	movf	_i,w
+   762  07C2  1D03               	btfss	3,2
+   763  07C3  2FB8               	goto	l80
+   764  07C4                     l615:	
+   765                           
+   766                           ;RAINBO-starter.c: 122: }
+   767                           ;RAINBO-starter.c: 123: temp = arcColours[2][index];
+   768  07C4  0872               	movf	_index,w
+   769  07C5  3E2C               	addlw	(low ((_arcColours| 0+12)))& (0+255)
+   770  07C6  0086               	movwf	6
+   771  07C7  0187               	clrf	7
+   772  07C8  0801               	movf	1,w
+   773  07C9  00F7               	movwf	??_neoArray
+   774  07CA  0877               	movf	??_neoArray,w
+   775  07CB  00F1               	movwf	_temp
+   776                           
+   777                           ;RAINBO-starter.c: 124: for (i = 8; i != 0; i--) {
+   778  07CC  3008               	movlw	8
+   779  07CD  00F7               	movwf	??_neoArray
+   780  07CE  0877               	movf	??_neoArray,w
+   781  07CF  00F0               	movwf	_i
+   782  07D0  0870               	movf	_i,w
+   783  07D1  1903               	btfsc	3,2
+   784  07D2  2FDF               	goto	l625
+   785  07D3                     l82:	
+   786  07D3  160C               	bsf	268,4	;# 
+   787  07D4  0000               	nop	;# 
+   788  07D5  1FF1               	btfss	_temp,7	;# 
+   789  07D6  120C               	bcf	268,4	;# 
+   790  07D7  0000               	nop	;# 
+   791  07D8  35F1               	lslf	_temp,f	;# 
+   792  07D9  120C               	bcf	268,4	;# 
+   793  07DA  3001               	movlw	1
+   794  07DB  02F0               	subwf	_i,f
+   795  07DC  0870               	movf	_i,w
+   796  07DD  1D03               	btfss	3,2
+   797  07DE  2FD3               	goto	l82
+   798  07DF                     l625:	
+   799  07DF  3001               	movlw	1
+   800  07E0  02F8               	subwf	neoArray@leds,f
+   801  07E1  2F83               	goto	L1
+   802  07E2                     __end_of_neoArray:	
+   803                           
+   804                           	psect	text2
+   805  0767                     __ptext2:	
+   806 ;; *************** function _init *****************
+   807 ;; Defined at:
+   808 ;;		line 12 in file "RAINBO.c"
+   809 ;; Parameters:    Size  Location     Type
+   810 ;;		None
+   811 ;; Auto vars:     Size  Location     Type
+   812 ;;		None
+   813 ;; Return value:  Size  Location     Type
+   814 ;;                  1    wreg      void 
+   815 ;; Registers used:
+   816 ;;		wreg, status,2
+   817 ;; Tracked objects:
+   818 ;;		On entry : 0/0
+   819 ;;		On exit  : 0/0
+   820 ;;		Unchanged: 0/0
+   821 ;; Data sizes:     COMMON   BANK0   BANK1   BANK2
+   822 ;;      Params:         0       0       0       0
+   823 ;;      Locals:         0       0       0       0
+   824 ;;      Temps:          0       0       0       0
+   825 ;;      Totals:         0       0       0       0
+   826 ;;Total ram usage:        0 bytes
+   827 ;; Hardware stack levels used:    1
+   828 ;; This function calls:
+   829 ;;		Nothing
+   830 ;; This function is called by:
+   831 ;;		_main
+   832 ;; This function uses a non-reentrant model
+   833 ;;
+   834                           
+   835                           
+   836                           ;psect for function _init
+   837  0767                     _init:	
+   838                           
+   839                           ;RAINBO.c: 16: OSCCON = 0b11110000;
+   840                           
+   841                           ;incstack = 0
+   842                           ; Regs used in _init: [wreg+status,2]
+   843  0767  30F0               	movlw	240
+   844  0768  0021               	movlb	1	; select bank1
+   845  0769  0099               	movwf	25	;volatile
+   846                           
+   847                           ;RAINBO.c: 21: OPTION_REG = 0b00010000;
+   848  076A  3010               	movlw	16
+   849  076B  0095               	movwf	21	;volatile
+   850                           
+   851                           ;RAINBO.c: 23: PORTA = 0;
+   852  076C  0020               	movlb	0	; select bank0
+   853  076D  018C               	clrf	12	;volatile
+   854                           
+   855                           ;RAINBO.c: 24: LATA = 0;
+   856  076E  0022               	movlb	2	; select bank2
+   857  076F  018C               	clrf	12	;volatile
+   858                           
+   859                           ;RAINBO.c: 25: ANSELA = 0b00000011;
+   860  0770  3003               	movlw	3
+   861  0771  0023               	movlb	3	; select bank3
+   862  0772  008C               	movwf	12	;volatile
+   863                           
+   864                           ;RAINBO.c: 26: ADCON0 = 0b00000000;
+   865  0773  0021               	movlb	1	; select bank1
+   866  0774  019D               	clrf	29	;volatile
+   867                           
+   868                           ;RAINBO.c: 27: ADCON1 = 0b01100000;
+   869  0775  3060               	movlw	96
+   870  0776  009E               	movwf	30	;volatile
+   871                           
+   872                           ;RAINBO.c: 28: TRISA = 0b00001111;
+   873  0777  300F               	movlw	15
+   874  0778  008C               	movwf	12	;volatile
+   875                           
+   876                           ;RAINBO.c: 29: WPUA = 0b00001000;
+   877  0779  3008               	movlw	8
+   878  077A  0024               	movlb	4	; select bank4
+   879  077B  008C               	movwf	12	;volatile
+   880                           
+   881                           ;RAINBO.c: 31: WDTCON = 0b00001010;
+   882  077C  300A               	movlw	10
+   883  077D  0021               	movlb	1	; select bank1
+   884  077E  0097               	movwf	23	;volatile
+   885                           
+   886                           ;RAINBO.c: 35: INTCON = 0;
+   887  077F  018B               	clrf	11	;volatile
+   888  0780  0008               	return
+   889  0781                     __end_of_init:	
+   890  007E                     btemp	set	126	;btemp
+   891  007E                     wtemp0	set	126
+
+
+Data Sizes:
+    Strings     0
+    Constant    1
+    Data        21
+    BSS         4
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14      2       9
+    BANK0            80      0      18
+    BANK1            80      0       0
+    BANK2            80      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    _main->_neoArray
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0      30
+                               _init
+                           _neoArray
+ ---------------------------------------------------------------------------------
+ (1) _neoArray                                             2     2      0      30
+                                              0 COMMON     2     2      0
+ ---------------------------------------------------------------------------------
+ (1) _init                                                 0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _init
+   _neoArray
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM              F0      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITCOMMON            E      0       0       1        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               E      2       9       2       64.3%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+BITSFR2              0      0       0       3        0.0%
+SFR2                 0      0       0       3        0.0%
+STACK                0      0       0       3        0.0%
+BITSFR3              0      0       0       4        0.0%
+SFR3                 0      0       0       4        0.0%
+ABS                  0      0      1B       4        0.0%
+BITBANK0            50      0       0       5        0.0%
+BITSFR4              0      0       0       5        0.0%
+SFR4                 0      0       0       5        0.0%
+BANK0               50      0      12       6       22.5%
+BITSFR5              0      0       0       6        0.0%
+SFR5                 0      0       0       6        0.0%
+BITBANK1            50      0       0       7        0.0%
+BITSFR6              0      0       0       7        0.0%
+SFR6                 0      0       0       7        0.0%
+BANK1               50      0       0       8        0.0%
+BITSFR7              0      0       0       8        0.0%
+SFR7                 0      0       0       8        0.0%
+BITBANK2            50      0       0       9        0.0%
+BITSFR8              0      0       0       9        0.0%
+SFR8                 0      0       0       9        0.0%
+BANK2               50      0       0      10        0.0%
+BITSFR9              0      0       0      10        0.0%
+SFR9                 0      0       0      10        0.0%
+BITSFR10             0      0       0      11        0.0%
+SFR10                0      0       0      11        0.0%
+DATA                 0      0      1B      11        0.0%
+BITSFR11             0      0       0      12        0.0%
+SFR11                0      0       0      12        0.0%
+BITSFR12             0      0       0      13        0.0%
+SFR12                0      0       0      13        0.0%
+BITSFR13             0      0       0      14        0.0%
+SFR13                0      0       0      14        0.0%
+BITSFR14             0      0       0      15        0.0%
+SFR14                0      0       0      15        0.0%
+BITSFR15             0      0       0      16        0.0%
+SFR15                0      0       0      16        0.0%
+BITSFR16             0      0       0      17        0.0%
+SFR16                0      0       0      17        0.0%
+BITSFR17             0      0       0      18        0.0%
+SFR17                0      0       0      18        0.0%
+BITSFR18             0      0       0      19        0.0%
+SFR18                0      0       0      19        0.0%
+BITSFR19             0      0       0      20        0.0%
+SFR19                0      0       0      20        0.0%
+BITSFR20             0      0       0      21        0.0%
+SFR20                0      0       0      21        0.0%
+BITSFR21             0      0       0      22        0.0%
+SFR21                0      0       0      22        0.0%
+BITSFR22             0      0       0      23        0.0%
+SFR22                0      0       0      23        0.0%
+BITSFR23             0      0       0      24        0.0%
+SFR23                0      0       0      24        0.0%
+BITSFR24             0      0       0      25        0.0%
+SFR24                0      0       0      25        0.0%
+BITSFR25             0      0       0      26        0.0%
+SFR25                0      0       0      26        0.0%
+BITSFR26             0      0       0      27        0.0%
+SFR26                0      0       0      27        0.0%
+BITSFR27             0      0       0      28        0.0%
+SFR27                0      0       0      28        0.0%
+BITSFR28             0      0       0      29        0.0%
+SFR28                0      0       0      29        0.0%
+BITSFR29             0      0       0      30        0.0%
+SFR29                0      0       0      30        0.0%
+BITSFR30             0      0       0      31        0.0%
+SFR30                0      0       0      31        0.0%
+BITSFR31             0      0       0      32        0.0%
+SFR31                0      0       0      32        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.41 build -162212810 
+Symbol Table                                                                                   Fri Nov 10 22:01:56 2017
+
+                      _i 0070              __CFG_CP$OFF 0000                       l80 07B8  
+                     l82 07D3                       l78 079D                       _GO 04E9  
+                    LATA 010C                      l605 07A9                      l615 07C4  
+                    l625 07DF                      l739 075A             __CFG_CPD$OFF 0000  
+                    u377 0754                      u387 0763             __CFG_BORV$LO 0000  
+                    wreg 0009             __CFG_LVP$OFF 0000                     _ADON 04E8  
+                   _LATA 010C                     _WPUA 020C             __CFG_WRT$OFF 0000  
+                   _cRed 0076                     _main 0750                     _init 0767  
+                   _temp 0071                     fsr0h 0005                     fsr1h 0007  
+                   indf0 0000                     fsr0l 0004                     indf1 0001  
+                   fsr1l 0006                     btemp 007E                     _type 0074  
+                   start 0002            __CFG_IESO$OFF 0000            __CFG_PLLEN$ON 0000  
+                  ?_main 0077                    ?_init 0077                    _PORTA 000C  
+                  _TRISA 008C            __CFG_PWRTE$ON 0000           __CFG_FCMEN$OFF 0000  
+                  _cBlue 0073          __end_of_maxLEDs 0801                    _index 0072  
+         __CFG_BOREN$OFF 0000                    status 0003                    wtemp0 007E  
+         __CFG_MCLRE$OFF 0000          __initialization 07E2             __end_of_main 0767  
+           __end_of_init 0781                   ??_main 0079                   ??_init 0077  
+                 _ADCON0 009D                   _ADCON1 009E                   _ADRESH 009C  
+                 _ANSELA 018C                   _INTCON 000B                   _OSCCON 0099  
+                 _WDTCON 0097                   _cGreen 0075           __CFG_STVREN$ON 0000  
+       __end_of_neoArray 07E2             __pdataCOMMON 0074             neoArray@leds 0078  
+__end_of__initialization 07FD           __pcstackCOMMON 0077             __pidataBANK0 073E  
+             _arcColours 0020               __pmaintext 0750                ?_neoArray 0077  
+                __ptext1 0781                  __ptext2 0767                  _maxLEDs 0800  
+   end_of_initialization 07FD               ??_neoArray 0077                  init_ram 0738  
+                initloop 0739             __pstringtext 0800         __CFG_FOSC$INTOSC 0000  
+          __pidataCOMMON 0735      start_initialization 07E2              __pdataBANK0 0020  
+            __pbssCOMMON 0070                ___latbits 0001        __size_of_neoArray 0061  
+       __CFG_WDTE$SWDTEN 0000                 _neoArray 0781            __size_of_main 0017  
+          __size_of_init 001A        __CFG_CLKOUTEN$OFF 0000               _OPTION_REG 0095  

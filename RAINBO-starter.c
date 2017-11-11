@@ -29,7 +29,7 @@ unsigned char arcColours[3][6] = {//ROYGBV
     {0, 140, 215, 255, 0, 130},
     {0, 0, 0, 0, 255, 238}
 };
-// red is first, then green, then blue
+// red is first layer, then green, then blue
 
 unsigned char temp; // Temporary byte storage
 unsigned char i; // Generic index counter
@@ -99,7 +99,7 @@ void neoArray(unsigned char leds) {
             index = 0;
         }
         temp = arcColours[1][index];
-         // Copy green byte, prepare to shift MSB first
+        // Copy green byte, prepare to shift MSB first
         for (i = 8; i != 0; i--) // PWM each bit in assembly code for speed
         {
             asm("bsf LATA,4"); // Make N2 output high
@@ -171,9 +171,8 @@ int main(void) // Start of program
 
     while (1) {
         // neoRGB(cRed, cGreen, cBlue, maxLEDs);
-        neoArray(maxLEDs);
-        //SLEEP();
         //changeLEDS();
+        neoArray(maxLEDs);
         __delay_us(50);
     }
 }

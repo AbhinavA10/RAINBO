@@ -1,0 +1,83 @@
+[p LITE_MODE AUTOSTATIC PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 12F1840 ]
+[d frameptr 6 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\pic\eeprom.c
+[v _eecpymem eecpymem `(v  1 e 1 0 ]
+"39
+[v _memcpyee memcpyee `(v  1 e 1 0 ]
+"93 C:\Users\Abhi\Documents\MPLAB\RAINBO.X\RAINBO-starter.c
+[v _neoArray neoArray `(v  1 e 1 0 ]
+"166
+[v _main main `(i  1 e 2 0 ]
+"12 C:\Users\Abhi\Documents\MPLAB\RAINBO.X\RAINBO.c
+[v _init init `(v  1 e 1 0 ]
+"335 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic12f1840.h
+[v _INTCON INTCON `VEuc  1 e 1 @11 ]
+"412
+[v _PORTA PORTA `VEuc  1 e 1 @12 ]
+"971
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+"1120
+[v _OPTION_REG OPTION_REG `VEuc  1 e 1 @149 ]
+"1252
+[v _WDTCON WDTCON `VEuc  1 e 1 @151 ]
+"1367
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1524
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1543
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+"1622
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
+"1687
+[v _LATA LATA `VEuc  1 e 1 @268 ]
+"2339
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2911
+[v _WPUA WPUA `VEuc  1 e 1 @524 ]
+"4768
+[v _ADON ADON `VEb  1 e 0 @1256 ]
+"4970
+[v _GO GO `VEb  1 e 0 @1257 ]
+"18 C:\Users\Abhi\Documents\MPLAB\RAINBO.X\RAINBO-starter.c
+[v _cRed cRed `uc  1 e 1 0 ]
+"19
+[v _cGreen cGreen `uc  1 e 1 0 ]
+"20
+[v _cBlue cBlue `uc  1 e 1 0 ]
+"22
+[v _maxLEDs maxLEDs `DCCuc  1 e 1 0 ]
+"23
+[v _type type `uc  1 e 1 0 ]
+"25
+[v _index index `uc  1 e 1 0 ]
+"27
+[v _arcColours arcColours `[3][6]uc  1 e 18 0 ]
+"34
+[v _temp temp `uc  1 e 1 0 ]
+"35
+[v _i i `uc  1 e 1 0 ]
+"166
+[v _main main `(i  1 e 2 0 ]
+{
+"179
+} 0
+"93
+[v _neoArray neoArray `(v  1 e 1 0 ]
+{
+[v neoArray@leds leds `uc  1 a 1 wreg ]
+[v neoArray@leds leds `uc  1 a 1 wreg ]
+[v neoArray@leds leds `uc  1 a 1 1 ]
+"135
+} 0
+"12 C:\Users\Abhi\Documents\MPLAB\RAINBO.X\RAINBO.c
+[v _init init `(v  1 e 1 0 ]
+{
+"36
+} 0
